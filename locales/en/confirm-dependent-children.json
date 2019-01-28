@@ -1,0 +1,20 @@
+{
+  "title": "$t(confirm-dependent-children:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Confirm details",
+  "childrenDetails": "Children details",
+  "childBenefit": "Child benefit",
+  "dependentChildren": "Dependent children",
+  "pregnantAtDateOfDeath": "Pregnant",
+  "childBenefitNumber": "Child Benefit number",
+  "dependentChildrenYes": "Yes",
+  "dependentChildrenNo": "No",
+  "pregnantAtDateOfDeathYes": "Yes",
+  "pregnantAtDateOfDeathNo": "No",
+  "confirm": "Confirm - change to higher rate",
+  "confirm-same": "Confirm - leave at standard rate",
+  "willNotChange": "This rate will not change",
+  "willNotChangeBody": "These details are the same as the original claim's",
+  "changedButWillNotChangeBody": "The claimant needs to have a Child Benefit number",
+  "CHIBMissing": "Missing"
+}

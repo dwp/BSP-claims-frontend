@@ -1,0 +1,124 @@
+{
+  "heading": "Claim history",
+  "byUserOnDate": "By {{user}}",
+  "STANDARD": {
+    "heading": "Claim allowed",
+    "body": "Payment schedule created at standard rate."
+  },
+  "HIGHER": {
+    "heading": "Claim allowed",
+    "body": "Payment schedule created at higher rate."
+  },
+  "DisallowedForSPA": {
+    "heading": "Claim disallowed",
+    "body": "Claimant over State Pension age."
+  },
+  "ClaimDisallowedRelationshipNotVerified": {
+    "heading": "Claim disallowed",
+    "body": "No evidence of marriage or civil partnership received."
+  },
+  "ChildrenDetailsEnteredAsTrue": {
+    "heading": "Dependent children recorded",
+    "body": "Has dependent children."
+  },
+  "ChildrenDetailsEnteredAsFalse": {
+    "heading": "Dependent children recorded",
+    "body": ""
+  },
+  "ChildrenDetailsEnteredAsTrueAndPregnant": {
+    "heading": "Dependent children recorded",
+    "body": "Has dependent children. Is pregnant."
+  },
+  "ChildrenDetailsEnteredAsFalseAndPregnant": {
+    "heading": "Dependent children recorded",
+    "body": "Is pregnant."
+  },
+  "VerifyChildBenefit": {
+    "heading": "Child Benefit verified",
+    "body": ""
+  },
+  "UnverifiedChildBenefit": {
+    "heading": "Child Benefit number missing",
+    "body": ""
+  },
+  "ClaimDisallowedNotMarried": {
+    "heading": "Claim disallowed",
+    "body": "Claimant not married to or in civil partnership with deceased."
+  },
+  "ClaimantDetailsEntered": {
+    "heading": "Claim details entered",
+    "body": ""
+  },
+  "ClaimantDetailsConfirmed": {
+    "heading": "Claim details confirmed",
+    "body": ""
+  },
+  "ClaimantDetailsModified": {
+    "heading": "Claim details changed",
+    "body": ""
+  },
+  "VerifyDeath": {
+    "heading": "Death verified",
+    "body": ""
+  },
+  "UnverifiedDeath": {
+    "heading": "Record of death checked",
+    "body": "Evidence of death needed."
+  },
+  "VerifyRelationship": {
+    "heading": "Relationship verified",
+    "body": ""
+  },
+  "UnverifiedRelationship": {
+    "heading": "Relationship status checked",
+    "body": "Evidence of marriage or civil partnership needed."
+  },
+  "AddPaymentDetails": {
+    "heading": "Payment details entered",
+    "body": ""
+  },
+  "NoPaymentDetails": {
+    "heading": "Payment details missing",
+    "body": ""
+  },
+  "ChangePaymentDetails": {
+    "heading": "Payment details changed",
+    "body": ""
+  },
+  "ClaimDisallowedDeathNotVerified": {
+    "heading": "Claim disallowed",
+    "body": "No evidence of death received."
+  },
+  "VerifyNIConts": {
+    "heading": "Contributions verified",
+    "body": ""
+  },
+  "UnverifiedNIConts": {
+    "heading": "Claim disallowed",
+    "body": "Not enough National Insurance paid."
+  },
+  "ChangedRate": {
+    "heading": "Rate changed",
+    "body": ""
+  },
+  "Stopped-error": {
+    "heading": "Payment schedule stopped",
+    "body": "The claim was setup in error."
+  },
+  "Stopped-fraud": {
+    "heading": "Payment schedule stopped",
+    "body": "The claim is fraudulent."
+  },
+  "Stopped-prison": {
+    "heading": "Payment schedule stopped",
+    "body": "The claimant was imprisoned on {{day}} $t(date:months.{{month}}) {{year}}."
+  },
+  "Stopped-death": {
+    "heading": "Payment schedule stopped",
+    "body": "The claimant died on {{day}} $t(date:months.{{month}}) {{year}}."
+  },
+  "Stopped-clerical": {
+    "heading": "Payment schedule stopped",
+    "body": "The claim needs to be paid manually."
+  }
+}

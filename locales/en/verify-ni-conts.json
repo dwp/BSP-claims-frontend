@@ -1,0 +1,26 @@
+{
+  "back": "Back",
+  "title": "Verify National Insurance contributions - $t(app:serviceName)",
+  "heading": "Did the deceased pay enough National Insurance?",
+  "form": {
+    "sufficientNIContributions": {
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether the deceased paid enough National Insurance."
+      }
+    },
+    "niContsYear": {
+      "label": "Which year did you use as verification?",
+      "errors": {
+        "presence": "Enter the year you used as verification.",
+        "format": {
+         "notNumber": "Enter the year you used as verification - for example, '1987’.",
+         "before1975": "The year you used as verification must be 1975 or later.",
+         "futureYear": "The year you used cannot be a future tax year."
+        }
+      }
+    },
+    "submit": "Continue"
+  }
+}

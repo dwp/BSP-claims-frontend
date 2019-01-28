@@ -1,0 +1,12 @@
+{
+  "@links <link>[]": {
+    "@href": {
+      "required": true,
+      "type": "string"
+    },
+    "@title": {
+      "required": true,
+      "type": "string"
+    }
+  }
+}

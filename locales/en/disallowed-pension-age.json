@@ -1,0 +1,10 @@
+{
+  "title": "Disallow claim - $t(app:serviceName)",
+  "heading": "You are about to disallow this claim",
+  "disallowMessageText": "You entered the claimant’s date of birth as <strong class=\"bold\">$t(date:dayMonthYear, {{day, month, year}})</strong>. This means they were over State Pension age at the time of death.",
+  "form": {
+    "submit": "Disallow claim"
+  },
+  "back":"Back",
+  "cancel": "Cancel"
+}

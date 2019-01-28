@@ -1,0 +1,41 @@
+<i18n-var/>
+
+$ const {values, errors, backLink} = data;
+
+<bsp-layout page-title=i18n('change-pregnant:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=backLink>
+          <i18n-message key="change-pregnant:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="change-pregnant:heading"/>
+        </h1>
+        <form action=`/claim/${data.claimId}/change-pregnant` method="post" novalidate>
+
+          <gov-radios name="pregnantAtDateOfDeath" value=values.pregnantAtDateOfDeath
+            legend=i18n('change-pregnant:form.pregnantAtDateOfDeath.legend')
+            hide-legend=true
+            error=errors.pregnantAtDateOfDeath>
+            <@radio label=i18n('change-pregnant:form.pregnantAtDateOfDeath.labelYes')
+              value="true"/>
+            <@radio label=i18n('change-pregnant:form.pregnantAtDateOfDeath.labelNo')
+              value="false"/>
+          </gov-radios>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="change-pregnant:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

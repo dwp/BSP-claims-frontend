@@ -1,0 +1,10 @@
+{
+  "title": "$t(delete:heading) - $t(app:serviceName)",
+  "heading": "You are about to delete this claim",
+  "deleteMessageText": "All information will be deleted and the claim will need to be started again.",
+  "form": {
+    "submit": "Delete claim"
+  },
+  "back":"Back",
+  "cancel": "Cancel"
+}

@@ -1,0 +1,118 @@
+#!/usr/bin/env groovy
+////////////////////////////////////////////////////////////////////////////////
+// Jenkins pipeline script in 'Declarative' format
+////////////////////////////////////////////////////////////////////////////////
+pipeline {
+    environment {
+        NODE_CONFIG = 'Node 10.14.1 and NPM 6.4.1' // Needs to match a config setup in Jenkins
+
+        // Get system date in YY.MM.DD format. Used to stamp/version our artifacts
+        BUILD_DATE = sh (script: 'date +%y.%m.%d',
+                         returnStdout: true).trim()
+
+        VERSION = "${BUILD_DATE}.${BUILD_NUMBER}"
+    }
+
+    agent any // Use any available Jenkins agent
+
+    stages {
+        stage('Preparation') {
+            steps {
+                // Delete any and all contents of the workspace, as Jenkins
+                // doesn't seem to do this by default for pipeline jobs
+                cleanWs()
+            }
+
+        } // End 'Preparation' stage
+
+        stage('Clone the project from gitlab') {
+            steps {
+                // Checkout the project using the details in the Jenkins job
+                checkout scm
+            }
+
+        } // End 'Clone' stage
+
+        stage('Build the project') {
+            steps {
+                // Provide a wrapper containing the relevant Node & NPM config
+                nodejs(NODE_CONFIG) {
+                    sh "npm install"
+                }
+            }
+
+        } // End 'Build' stage
+
+        stage('Run unit/quality tests ') {
+            steps {
+                // Provide a wrapper containing the relevant Node & NPM config
+                nodejs(NODE_CONFIG) {
+                    sh "npm test"
+
+                    // TODO(GK): Sonarqube doesn't do its own code coverage, so we need to
+                    // provide output from another tool in order to feed into
+                    // Sonarqube.
+                    // Once we get AWS deploy sorted, we need to revisit this
+                    // and add a Sonarqube step
+                    // sh "node ./node_modules/istanbul/lib/cli.js report cobertura"
+                }
+            }
+
+        } // End 'Test' stage
+
+        stage('Package into RPM') {
+            steps {
+                // Create a directory to hold the artifacts we want to package/deploy
+                sh "mkdir -p var/deploy/BSP-CM-Frontend.${VERSION}"
+
+                // Bundle our artifacts into a tarball and store in our deploy directory
+                sh " tar acf var/deploy/BSP-CM-Frontend.${VERSION}/BSP-CM-Frontend.${VERSION}.tgz . \
+                        --exclude='./.*' \
+                        --exclude='./var' \
+                        --exclude='Jenkinsfile'"
+
+                // Add the .service file to our deploy directory
+                sh " cp ${WORKSPACE}/rpmfiles/bsp-cm.service var/deploy/BSP-CM-Frontend.${VERSION}/."
+
+                // Build the RPM using the resources now sitting in the holding ('var') folder
+                sh "/usr/local/bin/fpm -s dir \
+                                                   -t rpm \
+                                                   -n BSP-CM-Frontend \
+                                                   -v ${VERSION} \
+                                                   --before-install ${WORKSPACE}/rpmfiles/pre-install.sh \
+                                                   --after-install ${WORKSPACE}/rpmfiles/post-install.sh \
+                                                   var"
+            }
+
+        } // End 'Package' stage
+
+        stage('Promote RPM to yum in S3') {
+            steps {
+                // Create and switch to a new directory that we'll use to pull
+                // down the existing bereavement yum repository
+                dir('s3_sync') {
+                    // Synchronize our new folder with the S3 bucket containing
+                    // our yum repository (This pulls down all the yum repo files).
+                    sh "aws s3 sync s3://rbc-code-promotion-dev/RPMS/BSP . \
+                                    --quiet"
+
+                    // Add our new RPM package to this folder
+                    sh "mv ${WORKSPACE}/*.rpm ."
+
+                    // Rebuild the yum repository to include our new RPM package"
+                    sh "createrepo -d ."
+
+                    // Re-sync the folder to push the rebuilt/updated repo back
+                    // to the S3 bucket
+                    sh "aws s3 sync . s3://rbc-code-promotion-dev/RPMS/BSP \
+                                    --sse AES256 \
+                                    --delete \
+                                    --quiet"
+                }
+            }
+
+        } // End 'Deploy to yum' stage
+
+    } // End stages
+
+} // End pipeline

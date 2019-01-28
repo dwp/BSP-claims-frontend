@@ -1,0 +1,32 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('standard-rate:title')>
+
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="verify-child-benefit">
+          <i18n-message key="standard-rate:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="standard-rate:heading" full-name=data.fullName/>
+        </h1>
+
+        <p>
+          <i18n-message key="standard-rate:cantGetHigherYet"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/standard-rate` method="post">
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="standard-rate:continue"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+
+</bsp-layout>

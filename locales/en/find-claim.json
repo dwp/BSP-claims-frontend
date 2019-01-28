@@ -1,0 +1,33 @@
+{
+  "title": "$t(find-claim:heading) - $t(app:serviceName)",
+  "resultsTitle": "Search results or find a claim - $t(app:serviceName)",
+  "heading": "Find a claim",
+  "form": {
+    "find": {
+      "label": "Enter the claimant’s National Insurance number",
+      "errors": {
+        "presence": "Enter a National Insurance number.",
+        "format": "Enter a National Insurance number - for example, ‘QQ196953B’."
+      }
+    },
+    "submit": "Search"
+  },
+  "await": {
+    "error": "Something went wrong with your search. This could be because of a slow internet connection. Try again.",
+    "results": "Results",
+    "claimLink": {
+      "unfinished": "Unfinished claim<span class=\"visually-hidden\"> - {{date}}</span>",
+      "disallowed": "Disallowed claim<span class=\"visually-hidden\"> - {{date}}</span>",
+      "allowed": "Allowed claim<span class=\"visually-hidden\"> - {{date}}</span>"
+    },
+    "scheduleLink": {
+      "Active": "Active payment schedule",
+      "Stopped": "Stopped payment schedule",
+      "Ended": "Ended payment schedule"
+    },
+    "resultAccount": "{{name}}",
+    "resultAccountOverseas": "{{name}}, overseas payment",
+    "resultStopped": "Stopped on {{day}} {{month}} {{year}}",
+    "noResults": "No matching claims found."
+  }
+}

@@ -1,0 +1,65 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+$ values.marriageDate = values.marriageDate && splitDate(values.marriageDate);
+
+<bsp-layout page-title=i18n('relationship:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="tasks-to-complete">
+          <i18n-message key="relationship:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="relationship:heading"/>
+        </h1>
+
+        <form action=`/claim/${data.claimId}/verify-relationship` method="post" novalidate>
+          <gov-radios name="marriedAtDateOfDeath" legend=i18n('relationship:form.marriedAtDateOfDeath.legend')
+            hide-legend=true value=values.marriedAtDateOfDeath error=errors.marriedAtDateOfDeath>
+            <@radio label=i18n('relationship:form.marriedAtDateOfDeath.labelYes')
+              value="true" reveal="seen-evidence"/>
+            <@radio label=i18n('relationship:form.marriedAtDateOfDeath.labelNo')
+              value="false"/>
+          </gov-radios>
+          <div.panel.panel-border-narrow.js-hidden id="seen-evidence">
+            <gov-radios name="seenEvidence" legend=i18n('relationship:form.seenEvidence.legend')
+              value=(values.seenEvidence || values.marriageDate && 'true') error=errors.seenEvidence>
+              <@radio label=i18n('relationship:form.seenEvidence.labelYes') value="true" reveal="evidence-checks"/>
+              <@radio label=i18n('relationship:form.seenEvidence.labelNo') value="false"/>
+            </gov-radios>
+            <div.panel.panel-border-narrow.js-hidden id="evidence-checks">
+              <gov-checkboxes legend=i18n('relationship:form.evidence.legend')
+                body-text=i18n('relationship:form.evidence.hint') hint=" "
+                name="evidence" error=errors.evidence>
+                <@checkbox name="marriageVerifiedByCert" label=i18n('relationship:form.evidence.labelCertificate')
+                  value="true" checked=(values.marriageVerifiedByCert === 'true')/>
+                <@checkbox name="marriageVerifiedInCIS" label=i18n('relationship:form.evidence.labelCIS')
+                  value="true" checked=(values.marriageVerifiedInCIS === 'true')/>
+                <@checkbox name="marriageVerifiedInNIRS" label=i18n('relationship:form.evidence.labelNIRS')
+                  value="true" checked=(values.marriageVerifiedInNIRS === 'true')/>
+              </gov-checkboxes>
+              <gov-date-input legend=i18n('relationship:form.marriageDate.legend')
+                name="marriageDate" suffix="camel" error=errors.marriageDate
+                value=values.marriageDate value-day=values.marriageDateDay
+                value-month=values.marriageDateMonth value-year=values.marriageDateYear/>
+            </div>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="relationship:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

@@ -1,0 +1,33 @@
+<i18n-var/>
+
+$ const {values, errors, backLink} = data
+
+<bsp-layout page-title=i18n('change-payment-details:title')>
+
+  <@content>
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <a.link-back href=backLink>
+      <i18n-message key="change-payment-details:back"/>
+    </a>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <h1.heading-large><i18n-message key="change-payment-details:heading"/></h1>
+
+        <form method="post" action=`/claim/${data.claimId}/change-payment-details` novalidate>
+
+          <bsp-payment-form values=values errors=errors/>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="payment-details:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

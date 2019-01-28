@@ -1,0 +1,47 @@
+import getDisallowReason from '../../utils/get-disallow-reason';
+
+<i18n-var/>
+
+$ const claim = data.claim || {};
+$ const decision = (claim.decision || {}).allow ? 'allowed' : 'disallowed';
+
+<bsp-layout page-title=i18n('decision:title', {decision})>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+
+        <if(decision === 'allowed')>
+          <div.govuk-box-highlight>
+            <h1.heading-xlarge>
+              <i18n-message key="decision:allowed.heading"/>
+            </h1>
+            <p>
+              <i18n-message key="decision:allowed.scheduleCreated"/>
+            </p>
+          </div>
+        </if>
+        <else>
+          <h1.heading-xlarge>
+            <i18n-message key="decision:disallowed.heading"/>
+          </h1>
+
+          <h2.heading-medium>
+            <i18n-message key="decision:disallowed.legend"/>
+          </h2>
+
+          <ul.list-bullet.form-group>
+            <li>
+              <i18n-message key=`decision:disallowed.${getDisallowReason(claim)}`/>
+            </li>
+          </ul>
+        </else>
+
+        <p>
+          <a href=`/claim/${data.claimId}/view`>
+            <i18n-message key="decision:viewClaim"/>
+          </a>
+        </p>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

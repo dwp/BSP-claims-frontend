@@ -1,0 +1,31 @@
+{
+  "paymentSchedule": "Payment schedule only",
+  "paymentScheduleBody": "The claim was processed using an older version of this system.",
+  "paymentScheduleCam": "The claim details are in CAMLite.",
+  "log": {
+    "heading": "Log",
+    "logHeadings": {
+      "Active": "Switched from clerical process on {{day}} {{month}} {{year}}",
+      "Stopped": "Payment schedule stopped on {{day}} {{month}} {{year}}",
+      "ChangeRate": "Switched to higher rate on {{day}} {{month}} {{year}}",
+      "UpdatePaymentAccountDetails": "Bank details changed on {{day}} {{month}} {{year}}"
+    },
+    "reasons": {
+      "death": "Reason: claimant died on {{day}} {{month}} {{year}}",
+      "prison": "Reason: claimant imprisoned on {{day}} {{month}} {{year}}",
+      "fraud": "Reason: fraudulent claim",
+      "error": "Reason: claim set up in error",
+      "clerical": "Reason: moved to clerical process",
+      "fromClerical": "Initial payment and {{count}} monthly payment were made manually",
+      "fromClerical_plural": "Initial payment and {{count}} monthly payments were made manually",
+      "BackdatedInitialAndBackdatedMonthly": "Backdated initial payment and backdated monthly payments added to schedule",
+      "BackdatedInitial": "Backdated initial payment added to schedule",
+      "BackdatedMonthly": "Backdated monthly payments added to schedule",
+      "NoBackdating": "There were no backdated payments to be made",
+      "UpdatePaymentAccountDetails": {
+        "from": "Old account",
+        "to": "New account"
+      }
+    }
+  }
+}

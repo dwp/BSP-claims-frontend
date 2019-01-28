@@ -1,0 +1,36 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+<bsp-layout page-title=i18n('disallow-ni-conts:title')>
+
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/verify-national-insurance`>
+          <i18n-message key="disallow-ni-conts:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="disallow-ni-conts:heading"/>
+        </h1>
+        <p>
+          <i18n-message key="disallow-ni-conts:disallowMessageText"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/verify-national-insurance/disallow-claim` method="post">
+          <bsp-csrf-token/>
+
+          <button.button-warning.form-group type="submit">
+            <i18n-message key="disallow-ni-conts:form.submit"/>
+          </button>
+        </form>
+
+        <a.link-cancel href=`/claim/${data.claimId}/verify-national-insurance`>
+          <i18n-message key="disallow-ni-conts:cancel"/>
+        </a>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

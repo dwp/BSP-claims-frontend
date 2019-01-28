@@ -1,0 +1,24 @@
+{
+  "title": "$t(dependent-children:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Dependent children",
+  "form": {
+    "dependentChildren": {
+      "legend": "Does the claimant say they have dependent children?",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select if the claimant says they have dependent children."
+      }
+    },
+    "pregnantAtDateOfDeath": {
+      "legend": "Was the claimant pregnant when their partner died?",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select if the claimant was pregnant when their partner died."
+      }
+    },
+    "submit": "Continue"
+  }
+}

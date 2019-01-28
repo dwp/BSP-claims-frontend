@@ -1,0 +1,28 @@
+static const invalidIdCharacters = /[^A-Za-z0-9]+/g;
+
+static function tabId(title, index) {
+  return String(title).toLocaleLowerCase().replace(invalidIdCharacters, '-') + '-' + index;
+}
+
+<div.tabs>
+  <div.tabs-nav>
+    <ul.tabs-list>
+      <for(tabIndex, tab in input.tabs)>
+        <li>
+          <a href=`#${tabId(tab.title, tabIndex)}`>
+            ${tab.title}
+          </a>
+        </li>
+      </for>
+    </ul>
+  </div>
+  <div.tabs-content>
+    <for(tabIndex, tab in input.tabs)>
+      <div.tabs-panel id=tabId(tab.title, tabIndex)>
+        <div.tabs-panel-inner>
+          <${tab.renderBody}/>
+        </div>
+      </div>
+    </for>
+  </div>
+</div>

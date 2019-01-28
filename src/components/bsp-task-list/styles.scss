@@ -1,0 +1,84 @@
+@import 'design-patterns/alpha-beta';
+@import 'colours';
+@import 'measurements';
+@import 'shims';
+@import 'typography';
+
+// Task list pattern
+
+// Override column width for tablet and up
+.column-minimum {
+  @include media(tablet) {
+    min-width: 600px;
+  }
+}
+
+// Spacing to the left of the task list
+$task-list-indent: 35px;
+
+.task-list {
+  margin-top: $gutter;
+
+  @include media(tablet) {
+    margin-top: ($gutter * 2);
+  }
+}
+
+.task-list-section {
+  @include bold-24;
+
+  display: table;
+  padding-bottom: ($gutter / 6);
+}
+
+.task-list-section-number {
+  display: table-cell;
+  padding-right: ($gutter / 6);
+
+  @include media(tablet) {
+    min-width: $task-list-indent;
+    padding-right: 0;
+  }
+}
+
+
+.task-list-items {
+  margin-bottom: $gutter;
+
+  @include media(tablet) {
+    margin-bottom: ($gutter * 2);
+  }
+}
+
+.task-list-item {
+  @extend %contain-floats;
+
+  border-bottom: 1px solid $border-colour;
+  padding-bottom: $gutter-one-third;
+  padding-top: $gutter-one-third;
+}
+
+.task-list-item:first-child {
+  border-top: 1px solid $border-colour;
+}
+
+.task-name {
+  float: left;
+  width: $two-thirds;
+
+  @include media(mobile) {
+    width: $half;
+  }
+}
+
+.task-status {
+  @include phase-tag;
+
+  float: right;
+  margin-right: 0;
+  padding-top: 3px;
+}
+
+.task-status-not-complete {
+  background-color: $grey-1;
+}

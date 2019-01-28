@@ -1,0 +1,42 @@
+<i18n-var/>
+
+$ const {values, errors} = data
+
+<bsp-layout page-title=i18n('payment-details:title')>
+
+  <@content>
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <a.link-back href=`/claim/${data.claimId}/tasks-to-complete`>
+      <i18n-message key="payment-details:back"/>
+    </a>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <h1.heading-large><i18n-message key="payment-details:heading"/></h1>
+
+        <form method="post" action=`/claim/${data.claimId}/payment-details` novalidate>
+          <gov-radios legend=i18n('payment-details:form.detailsPresent.legend')
+            name="detailsPresent" error=errors.detailsPresent  value=(values.detailsPresent || (values.accountType && 'yes')) hide-legend>
+            <@radio label=i18n('payment-details:form.detailsPresent.labelYes')
+              value="yes" reveal="present-yes"/>
+            <@radio label=i18n('payment-details:form.detailsPresent.labelNo')
+              value="no"/>
+          </gov-radios>
+
+          <div id="present-yes" class="panel panel-border-narrow js-hidden">
+            <bsp-payment-form values=values errors=errors/>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="payment-details:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

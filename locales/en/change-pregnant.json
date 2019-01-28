@@ -1,0 +1,16 @@
+{
+  "title": "$t(change-pregnant:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Was the claimant pregnant when their partner died?",
+  "form": {
+    "pregnantAtDateOfDeath": {
+      "legend": "Was the claimant pregnant when their partner died?",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select if the claimant was pregnant when their partner died."
+      }
+    },
+    "submit": "Continue"
+  }
+}

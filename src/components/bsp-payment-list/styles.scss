@@ -1,0 +1,32 @@
+@import 'colours';
+@import 'shims';
+
+.payment-list li {
+  padding: .63158em 0 .47368em 0;
+  border-bottom: 1px solid $border-colour;
+  @extend %contain-floats;
+}
+
+.payment-list {
+  border-top: 1px solid $border-colour;
+}
+
+.payment-list p {
+  margin:0;
+  float:left;
+}
+
+.payment-list-amount {
+  width:50%;
+}
+
+.payment-list strong {
+  display:block;
+}
+
+.payment-list-type {
+  width:50%;
+  text-align: right;
+  font-size: 16px;
+  color: $grey-1;
+}

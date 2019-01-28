@@ -1,0 +1,9 @@
+{
+  "@items <item>[]": {
+    "@name": {
+      "required": true,
+      "type": "string"
+    },
+    "@hook":  "string"
+  }
+}

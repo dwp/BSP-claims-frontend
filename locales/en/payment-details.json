@@ -1,0 +1,54 @@
+{
+  "back": "Back",
+  "title": "Payment details - $t(app:serviceName)",
+  "heading": "Has the claimant provided payment details?",
+  "form": {
+    "detailsPresent": {
+      "legend": "Has the claimant provided payment details?",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether the claimant has provided payment details."
+      }
+    },
+    "accountType": {
+      "legend": "Type of account",
+      "labelBank": "Bank account",
+      "labelBuilding": "Building society account",
+      "errors": {
+        "presence": "Select if it is a bank account or building society account."
+      }
+    },
+    "nameOnAccount": {
+      "label": "Name on account",
+      "errors": {
+        "presence": "Enter a name on account.",
+        "format": "Enter a name on account without {{-invalid}}."
+      }
+    },
+    "sortCode": {
+      "label": "Sort code",
+      "errors": {
+        "presence": "Enter a sort code.",
+        "format": "Enter a sort code - for example, ‘12 34 56’, ‘123456’ or ‘12-34-56’.",
+        "modulus": "Check the sort code - the one entered does not match the account number."
+      }
+    },
+    "accountNumber": {
+      "label": "Account Number",
+      "errors": {
+        "presence": "Enter an account number.",
+        "format": "Enter an account number - for example, ‘12345678’.",
+        "modulus": "Check the account number - the one entered does not match the sort code."
+      }
+    },
+    "rollNumber": {
+      "label": "Building society roll number",
+      "errors": {
+        "presence": "Enter a roll number.",
+        "format": "Enter roll number without {{-invalid}}."
+      }
+    },
+    "submit": "Continue"
+  }
+}

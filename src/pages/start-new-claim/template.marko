@@ -1,0 +1,84 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+
+<bsp-layout page-title=i18n('start-new-claim:title')>
+
+  <@content>
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+
+        <h1.heading-large>
+          <i18n-message key="start-new-claim:heading"/>
+        </h1>
+
+        <form action="/start-new-claim" method="post" novalidate>
+
+          <h2.heading-medium id="claimant-details">
+            <i18n-message key="start-new-claim:form.claimantDetails.heading"/>
+          </h2>
+
+          <gov-input label=i18n('start-new-claim:form.title.label') name="title"
+            error=errors.title value=values.title input-classes="form-control-1-4"/>
+
+          <gov-input label=i18n('start-new-claim:form.fullName.label') name="fullName"
+            error=errors.fullName value=values.fullName/>
+
+          <gov-input label=i18n('start-new-claim:form.nino.label') name="nino"
+            error=errors.nino value=values.nino/>
+
+          <gov-date-input legend=i18n('start-new-claim:form.dateOfBirth.legend')
+            name="dateOfBirth" suffix="camel" value=values.dateOfBirth value-day=values.dateOfBirthDay
+            value-month=values.dateOfBirthMonth value-year=values.dateOfBirthYear
+            error=errors.dateOfBirth/>
+
+          <gov-radios name="sex" legend=i18n('start-new-claim:form.sex.legend')
+            hint=i18n('start-new-claim:form.sex.hint') value=values.sex error=errors.sex>
+            <@radio label=i18n('start-new-claim:form.sex.labelFemale') value="Female"/>
+            <@radio label=i18n('start-new-claim:form.sex.labelMale') value="Male"/>
+          </gov-radios>
+
+          <h2.heading-medium id="deceased-details">
+            <i18n-message key="start-new-claim:form.partnerDetails.heading"/>
+          </h2>
+
+          <gov-input label=i18n('start-new-claim:form.partnerTitle.label') name="partnerTitle"
+            error=errors.partnerTitle value=values.partnerTitle input-classes="form-control-1-4"/>
+
+          <gov-input label=i18n('start-new-claim:form.partnerFullName.label') name="partnerFullName"
+            error=errors.partnerFullName value=values.partnerFullName/>
+
+          <gov-input label=i18n('start-new-claim:form.partnerNino.label') name="partnerNino"
+            error=errors.partnerNino value=values.partnerNino/>
+
+          <gov-date-input legend=i18n('start-new-claim:form.dateOfDeath.legend')
+            name="dateOfDeath" suffix="camel" value=values.dateOfDeath value-day=values.dateOfDeathDay
+            value-month=values.dateOfDeathMonth value-year=values.dateOfDeathYear
+            error=errors.dateOfDeath/>
+
+          <h2.heading-medium>
+            <i18n-message key="start-new-claim:form.dateOfClaim.legend"/>
+          </h2>
+
+          <gov-date-input legend=i18n('start-new-claim:form.dateOfClaim.legend')
+            name="dateOfClaim" suffix="camel" value=values.dateOfClaim value-day=values.dateOfClaimDay
+            value-month=values.dateOfClaimMonth value-year=values.dateOfClaimYear
+            error=errors.dateOfClaim hide-legend=true/>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="start-new-claim:form.submit"/>
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

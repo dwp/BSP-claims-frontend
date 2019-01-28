@@ -1,0 +1,64 @@
+import splitDate from '../../utils/split-date'
+import GBP from '../../utils/gbp-formater'
+import getPaymentType from '../../utils/get-payment-type'
+
+$ const today = new Date();
+
+<i18n-var/>
+
+<div>
+  <if(input.preventPayments)>
+    <p>
+      <a.change-link-inline href=`/claim/${input.claimId}/stop`
+        data-journey-click="button-click:schedule:prevent-payments"
+        data-test-hook="prevent-payments-link">
+        <i18n-message key="schedule:preventedPayment.link"/>
+      </a>
+    </p>
+  </if>
+  <h2 class="heading-small" data-test-hook=input.hook+'-heading'>
+    <i18n-message key=input.heading/>
+  </h2>
+</div>
+
+<if(input.payments.length > 0)>
+  <ol.payment-list data-test-hook=input.hook>
+    <for(payment in input.payments)>
+    <li>
+
+      $ const paymentDate = new Date(payment.date)
+      $ const isItDue = today < paymentDate
+      $ const messageKey = isItDue ? input.dueMessage : input.message
+      $ const paymentType = getPaymentType(payment)
+
+      <p.payment-list-amount>
+        <i18n-message key=messageKey
+          date=i18n("date:dayMonthYear", splitDate(payment.date))
+          value=GBP.format(payment.amount / 100)/>
+      </p>
+
+      <if(input.showAccountNumber)>
+        <p.payment-list-type>
+          <span.visuallyhidden><i18n-message key="schedule:accountNumber"/></span>
+          ${payment.accountNumber}
+        </p>
+      </if>
+      <if(paymentType)>
+        <p.payment-list-type data-test-hook="payment-type">
+        <i18n-message key=`schedule:${paymentType}`/>
+      </p>
+      </if>
+      <if(input.cpsLabel && isItDue)>
+        <p.payment-list-type data-test-hook="payment-status">
+          <i18n-message key="schedule:sentToCps"/>
+        </p>
+      </if>
+    </li>
+  </for>
+  </ol>
+</if>
+<else>
+  <p.data-summary-paragraph data-test-hook='no-'+input.hook>
+    <i18n-message key=input.emptyMessage/>
+  </p>
+</else>

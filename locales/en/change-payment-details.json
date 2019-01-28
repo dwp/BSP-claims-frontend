@@ -1,0 +1,5 @@
+{
+  "title": "$t(change-payment-details:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Payment details"
+}

@@ -1,0 +1,34 @@
+@import "colours";
+
+.search-results {
+  margin: 0 0 2em;
+}
+
+.result {
+  border-bottom: 1px solid $border-colour;
+  margin: 0;
+  padding: 1em 0;
+}
+
+.result-meta,
+.result-link {
+  display: block;
+}
+
+.result-link {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.result-meta {
+  font-size: .8421em;
+}
+
+.result:first-child {
+  padding-top: 0;
+}
+
+.result:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}

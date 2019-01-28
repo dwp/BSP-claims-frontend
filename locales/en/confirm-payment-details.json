@@ -1,0 +1,10 @@
+{
+  "title": "$t(confirm-payment-details:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Confirm payment details",
+  "nameOnAccount": "Name on account",
+  "sortCode": "Sort code",
+  "accountNumber": "Account number",
+  "rollNumber": "Roll number",
+  "confirm": "Confirm"
+}

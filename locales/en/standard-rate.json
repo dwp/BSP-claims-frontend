@@ -1,0 +1,7 @@
+{
+  "back": "Back",
+  "title": "$t(child-benefit:heading) - $t(app:serviceName)",
+  "heading": "{{full-name}} will get the standard rate",
+  "cantGetHigherYet": "They’ve said they have dependent children but there’s no Child Benefit number. This means they can’t get the higher rate yet.",
+  "continue": "Continue"
+}

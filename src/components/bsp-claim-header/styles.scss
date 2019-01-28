@@ -1,0 +1,24 @@
+@import 'colours';
+@import 'design-patterns/alpha-beta';
+
+.claim-heading .heading-xlarge {
+  margin-bottom: 0;
+}
+
+.claim-status {
+  @include phase-tag;
+
+  background-color: $grey-1;
+  margin-bottom: 3.1578em;
+  padding: .3125em .3125em .15em;
+}
+
+.claim-status-disallowed, 
+.claim-status-stopped {
+  background-color: $mellow-red;
+}
+
+.claim-status-allowed, 
+.claim-status-active {
+  background-color: $grass-green;
+}

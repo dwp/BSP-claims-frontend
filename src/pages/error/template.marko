@@ -1,0 +1,40 @@
+import {IS_PRODUCTION} from '../../lib/constants';
+
+static function formatStackTrace(stack) {
+  return stack.replace(/\/.*claims-frontend/g, '~').replace(/^\s+|\s+$/g, '');
+}
+
+<i18n-var/>
+
+<bsp-layout page-title=i18n(`error:${data.status}.title`)>
+
+  <@content>
+    <h1.heading-xlarge>
+      <i18n-message key=`error:${input.status}.heading`/>
+    </h1>
+
+    <p.text.lede>
+      <i18n-message key=`error:${input.status}.body`/>
+    </p>
+    <if(data.status === 403)>
+      <ul.list>
+        <li>
+          <a href="/start-new-claim">
+            <i18n-message key="start-new-claim:heading"/>
+          </a>
+        </li>
+        <li>
+          <a href="/find-claim">
+            <i18n-message key="find-claim:heading"/>
+          </a>
+        </li>
+      </ul>
+    </if>
+
+    <if(!IS_PRODUCTION)>
+      <pre.form-group-error.error-message>  ${formatStackTrace(input.stack)}</pre>
+    </if>
+
+  </@content>
+
+</bsp-layout>

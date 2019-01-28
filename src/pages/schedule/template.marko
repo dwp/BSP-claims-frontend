@@ -1,0 +1,116 @@
+import splitDate from '../../utils/split-date'
+
+<i18n-var/>
+
+<bsp-layout page-title=i18n("schedule:title")>
+
+  <@content>
+
+    $ const claim = data.claim || {};
+    $ const {eligibilityCriteria} = claim;
+
+    <div.grid-row>
+      <div.column-two-thirds>
+
+        <bsp-claim-header status=claim.schedule.status
+          name=claim.claimantDetails.fullName nino=claim.nino/>
+
+        <bsp-nav-links>
+          <@link title="Claim details" href=`/claim/${claim.claimId}/view`/>
+          <@link title="Payment schedule"
+            href=`/claim/${claim.claimId}/payment-schedule`/>
+        </bsp-nav-links>
+
+        <section.display-wrapper>
+          <h2 class="heading-small">
+            <i18n-message key="schedule:activeBankDetails.paymentDetails"/>
+          </h2>
+
+          <if(claim)>
+            <bsp-summary>
+              <@item name=i18n("schedule:activeBankDetails.accountName")>
+                ${claim.schedule.activeBankDetails.accountName}
+              </@item>
+              <@item name=i18n(`schedule:activeBankDetails.sortCode`)>
+                ${claim.schedule.activeBankDetails.sortCode}
+              </@item>
+              <@item name=i18n(`schedule:activeBankDetails.accountNumber`)>
+                ${claim.schedule.activeBankDetails.accountNumber}
+              </@item>
+              <if(claim.schedule.activeBankDetails.rollNumber)>
+                <@item name=i18n(`schedule:activeBankDetails.rollNumber`)>
+                  ${claim.schedule.activeBankDetails.rollNumber}
+                </@item>
+              </if>
+            </bsp-summary>
+          </if>
+          <if(claim.schedule.status === 'Active')>
+            <a.change-link href="change-payment-details">
+              <i18n-message key="claim-details:changePaymentDetails"
+                hide-start="<span class=\"visually-hidden\">"
+                hide-end="</span>"/>
+            </a>
+          </if>
+        </section>
+
+        <h2 class="heading-small" data-test-hook="rate-heading">
+          <i18n-message key="schedule:rate.title"/>
+        </h2>
+          <p.data-summary-paragraph.display-wrapper data-test-hook="rate-body">
+            <i18n-message key=`schedule:rate.${claim.schedule.rate}`/>
+            <if(claim.schedule.rate !== '73132')>
+            <if(!claim.decision)>
+              <a.change-link-inline href="dependent-children">
+                <i18n-message key="claim-details:changeDependantChildren"
+                  hide-start="<span class=\"visually-hidden\">"
+                  hide-end="</span>"/>
+              </a>
+            </if>
+            <else-if(claim.schedule && claim.schedule.status === "Active")>
+              $ const childLink = eligibilityCriteria.dependentChildren  && !eligibilityCriteria.pregnantAtDateOfDeath ? "change-pregnant" : "change-dependent-children";
+              <a.change-link-inline
+                href=`${childLink}`>
+                <i18n-message key="claim-details:changeDependantChildren"
+                  hide-start="<span class=\"visually-hidden\">"
+                  hide-end="</span>"/>
+              </a>
+            </else-if>
+            </if>
+          </p>
+
+      </div>
+    </div>
+
+    $ const showAccountNumber = claim.changeInfoList.some(change => change.changeDescription === "ChangePaymentDetails");
+    $ const scheduleIsActive = claim.schedule.status === 'Active';
+
+    <div.grid-row>
+      <div.column-half>
+        <bsp-payment-list payments=claim.schedule.issuedPayments
+          heading="schedule:issuedPayment.heading"
+          due-message="schedule:issuedPayment.duePaymentMessage"
+          message="schedule:issuedPayment.paymentMessage"
+          empty-message="schedule:issuedPayment.emptyMessage"
+          cps-label=true
+          show-account-number=showAccountNumber
+          hook="paid-payments"/>
+      </div>
+
+      $ const tag = 'schedule:' + (claim.schedule.status === 'Stopped' ? 'preventedPayment' : 'plannedPayment');
+
+      <div.column-half>
+        <bsp-payment-list payments=claim.schedule.plannedPayments
+          heading=`${tag}.heading`
+          due-message=`${tag}.duePaymentMessage`
+          message=`${tag}.paymentMessage`
+          empty-message=`${tag}.emptyMessage`
+          show-account-number=showAccountNumber
+          prevent-payments=scheduleIsActive
+          claim-id=claim.claimId
+          hook="planned-payments"/>
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

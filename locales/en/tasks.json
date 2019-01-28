@@ -1,0 +1,25 @@
+{
+  "title": "Unfinished claim - $t(app:serviceName)",
+  "status": {
+    "unfinished": "Unfinished",
+    "disallowed": "Disallowed"
+  },
+  "tabs": {
+    "tasksToComplete": "Tasks to complete",
+    "claimDetails" : "Claim details"
+  },
+  "enterClaimInformation": "Enter claim information",
+  "claimDetails" : "Claim details",
+  "paymentDetails": "Payment details",
+  "dependentChildren": "Dependent children",
+  "death": "Death",
+  "verifyEvidence": "Verify Evidence",
+  "marriage": "Marriage or civil partnership",
+  "childBenefit": "Child Benefit",
+  "niConts": "National Insurance contributions",
+  "submitClaim": "Submit claim",
+  "checkAndConfirm": "Check and confirm",
+  "complete": "Completed",
+  "not-complete": "Not complete",
+  "delete": "Delete claim"
+}

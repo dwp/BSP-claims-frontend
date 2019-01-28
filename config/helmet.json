@@ -1,0 +1,44 @@
+{
+  "contentSecurityPolicy": {
+    "directives": {
+      "defaultSrc": [
+        "'self'"
+      ],
+      "scriptSrc": [
+        "'self'",
+        "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+        "'sha256-HSfrfkYz/NPgO2qUv6/DNPjLBR0DGBpp89t1X0pv4VM='",
+        "'sha256-G29/qSW/JHHANtFhlrZVDZW1HOkCDRc78ggbqwwIJ2g='",
+        "'sha256-MvVrmx8zKcUdSK2le7JKHhMmzUNWuJlVh0nSDsVVlio='",
+        "www.googletagmanager.com",
+        "www.google-analytics.com",
+        "tagmanager.google.com"
+      ],
+      "styleSrc": [
+        "'self'",
+        "'sha256-kELgoK46JmGjLd8UHfzN0qJToDgIB+yMtRHG8PtGL7s='",
+        "fonts.googleapis.com",
+        "tagmanager.google.com"
+      ],
+      "imgSrc": [
+        "'self'",
+        "data:",
+        "www.google-analytics.com",
+        "www.gstatic.com",
+        "ssl.gstatic.com"
+      ],
+      "fontSrc": [
+        "'self'",
+        "data: blob:",
+        "fonts.gstatic.com"
+      ],
+      "frameSrc": [
+        "www.googletagmanager.com"
+      ]
+    },
+    "reportOnly": false,
+    "setAllHeaders": true,
+    "disableAndroid": false
+  },
+  "noCache": true
+}

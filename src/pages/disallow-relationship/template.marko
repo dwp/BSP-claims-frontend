@@ -1,0 +1,33 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('disallow-relationship:title')>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/verify-relationship`>
+          <i18n-message key="disallow-relationship:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="disallow-relationship:heading"/>
+        </h1>
+
+        <p>
+          <i18n-message key="disallow-relationship:body"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/verify-relationship/disallow-claim` method="post">
+          <bsp-csrf-token/>
+
+          <button.button-warning.form-group type="submit">
+            <i18n-message key="disallow-relationship:submit"/>
+          </button>
+        </form>
+
+        <a.link-cancel href=`/claim/${data.claimId}/verify-relationship`>
+          <i18n-message key="disallow-relationship:cancel"/>
+        </a>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

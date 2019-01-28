@@ -1,0 +1,51 @@
+@import 'colours';
+@import 'css3';
+@import 'shims';
+
+#global-header-bar {
+  display: none;
+}
+
+.nav-list {
+  @extend %contain-floats;
+
+  border-bottom: 1px $border-colour solid;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.nav-list-item {
+  float: left;
+  list-style-type: none;
+
+  @include media(mobile) {
+    width: 100%;
+  }
+
+  &:hover {
+    background: $highlight-colour;
+  }
+}
+
+.nav-link {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+
+  &:visited {
+    color: $link-colour;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.nav-link-active {
+  border-bottom: 5px $govuk-blue solid;
+  padding-bottom: 10px;
+}
+
+main .nav-bar {
+  margin-bottom:3em;
+}

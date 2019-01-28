@@ -1,0 +1,72 @@
+import isComplete from '../../utils/is-complete';
+import searchChangeHistory from '../../utils/search-change-history';
+import {CHANGE_HISTORY_DEATH_NOT_VERIFIED, CHANGE_HISTORY_DEATH_VERIFIED, CHANGE_HISTORY_ADD_PAYMENT_DETAILS, CHANGE_HISTORY_NO_PAYMENT_DETAILS} from '../../lib/constants';
+
+<i18n-var/>
+
+<bsp-layout page-title=i18n('tasks:title')>
+
+  <@content>
+
+    $ const claim = data.claim || {};
+    $ const {eligibilityCriteria} = claim;
+    $ const status = claim.decision ? (claim.decision.allow ? 'allowed' : 'disallowed') : 'unfinished';
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <bsp-claim-header
+          status=status
+          name=claim.claimantDetails.fullName
+          nino=claim.nino/>
+
+        <bsp-tabs>
+          <@tab title=i18n('tasks:tabs.tasksToComplete')>
+            <h2.js-visually-hidden.heading-medium>
+              <i18n-message key="tasks:tabs.tasksToComplete"/>
+            </h2>
+            <bsp-task-list>
+              <@task-section title=i18n('tasks:enterClaimInformation')>
+                <@task name=i18n('tasks:claimDetails')
+                  status=isComplete(claim.dateOfClaim)/>
+                <@task name=i18n('tasks:paymentDetails') href="payment-details"
+                  status=isComplete(claim.paymentAccount && claim.paymentAccount.accountType, searchChangeHistory(claim.changeInfoList,  CHANGE_HISTORY_ADD_PAYMENT_DETAILS, CHANGE_HISTORY_NO_PAYMENT_DETAILS))/>
+                <@task name=i18n('tasks:dependentChildren') href="dependent-children"
+                  status=isComplete(eligibilityCriteria && eligibilityCriteria.dependentChildren !== null)/>
+              </@task-section>
+              <@task-section title=i18n('tasks:verifyEvidence')>
+                <@task name=i18n('tasks:death') href="verify-death"
+                  status=isComplete(claim.deathDate, searchChangeHistory(claim.changeInfoList, CHANGE_HISTORY_DEATH_NOT_VERIFIED, CHANGE_HISTORY_DEATH_VERIFIED))/>
+                <@task name=i18n('tasks:marriage') href="verify-relationship"
+                  status=isComplete(claim.marriageDate, eligibilityCriteria && eligibilityCriteria.marriedAtDateOfDeath)/>
+                <@task name=i18n('tasks:childBenefit') href="verify-child-benefit"
+                  status=isComplete(claim.childrenCHIBinCBOL)
+                  hide=(!eligibilityCriteria || eligibilityCriteria.dependentChildren !== true)/>
+                <@task name=i18n('tasks:niConts') href="verify-national-insurance"
+                  status=isComplete(eligibilityCriteria && eligibilityCriteria.sufficientNIContributions)/>
+              </@task-section>
+              <@task-section title=i18n('tasks:submitClaim') hide=(!(data.allowable && claim.paymentAccount && claim.paymentAccount.accountType && ((eligibilityCriteria.dependentChildren === true && isComplete(claim.childrenCHIBinCBOL)) || eligibilityCriteria.dependentChildren === false)))>
+                <@task name=i18n('tasks:checkAndConfirm') href="confirm-claim-details"/>
+              </@task-section>
+            </bsp-task-list>
+          </@tab>
+          <@tab title=i18n('tasks:tabs.claimDetails')>
+            <h2.js-visually-hidden.heading-medium>
+              <i18n-message key="tasks:tabs.claimDetails"/>
+            </h2>
+            <bsp-claim-details claim=claim heading-level="3"/>
+          </@tab>
+        </bsp-tabs>
+        <a.button.button-warning href=`/claim/${claim.claimId}/delete`
+          data-test-hook="delete-claim-link">
+          <i18n-message key="tasks:delete"/>
+        </a>
+      </div>
+
+      <div.column-third>
+        <bsp-claim-history history=claim.changeInfoList/>
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

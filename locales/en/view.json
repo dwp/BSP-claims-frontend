@@ -1,0 +1,7 @@
+{
+  "title": "$t(view:heading) - $t(app:serviceName)",
+  "heading": "View claim",
+  "decision": {
+    "disallowedBecause": "This claim was disallowed because:"
+  }
+}

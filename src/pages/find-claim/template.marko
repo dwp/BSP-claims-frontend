@@ -1,0 +1,99 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+$ const {errors = false} = data;
+
+<bsp-layout page-title=i18n(data.searchResults ? 'find-claim:resultsTitle' : 'find-claim:title')>
+
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <h1.heading-xlarge>
+      <i18n-message key="find-claim:heading"/>
+    </h1>
+
+    <form action="/find-claim" method="get">
+      <bsp-search-box name="nino" label=i18n('find-claim:form.find.label')
+        error=errors.nino value=data.nino
+        button-text=i18n('find-claim:form.submit')/>
+    </form>
+    <if(data.searchResults)>
+      <await(claims from data.searchResults)>
+        <await-error>
+          <p.lede>
+            <i18n-message key="find-claim:await.error"/>
+          </p>
+        </await-error>
+        <await-timeout>
+          <p.lede>
+            <i18n-message key="find-claim:await.error"/>
+          </p>
+        </await-timeout>
+        <if(claims.length > 0)>
+          <div.grid-row data-journey="search-result:find-a-claim:results">
+            <div.column-two-thirds>
+
+              <h2.heading-medium>
+                <i18n-message key="find-claim:await.results"/>
+              </h2>
+
+              <ul.search-results>
+                <for(claim in claims)>
+                  <li.result>
+                    <if(claim.dateOfClaim)>
+                      $ const date = i18n('date:dayMonthYear', splitDate(claim.dateOfClaim));
+
+                      <h3.result-link>
+                        <if(claim.decision)>
+                          <a href=`/claim/${claim.claimId}/view`>
+                            $ const decision = claim.decision.allow ? "allowed" : "disallowed"
+                            <i18n-message key=`find-claim:await.claimLink.${decision}` date=date/>
+                          </a>
+                        </if>
+                        <else>
+                          <a href=`/claim/${claim.claimId}/tasks-to-complete`>
+                            <i18n-message key="find-claim:await.claimLink.unfinished" date=date/>
+                          </a>
+                        </else>
+                      </h3>
+
+                      <span.result-meta>
+                        ${claim.claimantDetails && claim.claimantDetails.fullName}
+                      </span>
+                      <span.result-meta>
+                        ${date}
+                      </span>
+                    </if>
+                    <else if(claim.schedule)>
+                      $ const {schedule} = claim;
+
+                      <h3.result-link>
+                        <a href=`/schedule/${schedule.scheduleId}`>
+                          <i18n-message key=`find-claim:await.scheduleLink.${schedule.status}`/>
+                        </a>
+                      </h3>
+
+                      <span.result-meta>
+                        <i18n-message key="find-claim:await.resultAccount" name=schedule.name/>
+                      </span>
+                    </else>
+                  </li>
+                </for>
+              </ul>
+
+            </div>
+          </div>
+        </if>
+        <else>
+          <p.lede>
+            <i18n-message key="find-claim:await.noResults"/>
+          </p>
+        </else>
+      </await>
+    </if>
+
+  </@content>
+
+</bsp-layout>

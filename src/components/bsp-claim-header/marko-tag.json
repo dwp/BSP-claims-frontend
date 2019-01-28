@@ -1,0 +1,14 @@
+{
+  "@name": {
+    "required": true,
+    "type": "string"
+  },
+  "@nino": {
+    "required": true,
+    "type": "string"
+  },
+  "@status": {
+    "required": true,
+    "type": "string"
+  }
+}

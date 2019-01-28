@@ -1,0 +1,44 @@
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+
+<bsp-layout page-title=i18n('verify-ni-conts:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="tasks-to-complete">
+          <i18n-message key="verify-ni-conts:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="verify-ni-conts:heading"/>
+        </h1>
+
+        <form action=`/claim/${data.claimId}/verify-national-insurance` method="post" novalidate>
+          <gov-radios name="sufficientNIContributions" legend=i18n('verify-ni-conts:form.sufficientNIContributions.heading')
+            value=values.sufficientNIContributions error=errors.sufficientNIContributions hide-legend=true>
+            <@radio label=i18n('verify-ni-conts:form.sufficientNIContributions.labelYes')
+              value="true" reveal="ni-conts-year"/>
+            <@radio label=i18n('verify-ni-conts:form.sufficientNIContributions.labelNo')
+              value="false"/>
+          </gov-radios>
+
+          <div.panel.panel-border-narrow.js-hidden id="ni-conts-year">
+            <gov-input name="niContsYear" label=i18n('verify-ni-conts:form.niContsYear.label')
+              value=values.niContsYear error=errors.niContsYear/>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="verify-ni-conts:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

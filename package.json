@@ -1,0 +1,101 @@
+{
+  "name": "claims-frontend",
+  "version": "1.0.0",
+  "engines": {
+    "node": "^8.9.1"
+  },
+  "description": "Frontend for Bereavement Support Payment claim system",
+  "dependencies": {
+    "async": "^2.6.1",
+    "aws-sdk": "^2.391.0",
+    "body-parser": "^1.18.3",
+    "connect-redis": "^3.4.0",
+    "csurf": "^1.9.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "get-uk-state-pension-date": "git+ssh://git@gitlab.mgmt.rbcdwp.net/bereavement-support-payment/supporting-services/state-pension-date.git",
+
+    "get-uk-state-pension-date": "git+ssh://git@github.com:dwp/BSP-State-Pension-Date.git",
+
+    "got": "^9.6.0",
+    "govuk-elements-marko": "^5.2.6",
+    "govuk-elements-sass": "^3.1.3",
+    "govuk-template-marko": "^5.0.1",
+    "helmet": "^3.15.0",
+    "i18next": "^13.1.4",
+    "i18next-express-middleware": "^1.7.1",
+    "i18next-node-fs-backend": "^2.1.1",
+    "jquery": "^3.3.1",
+    "lasso": "^3.2.9",
+    "lasso-marko": "^2.4.6",
+    "lasso-sass": "^3.0.0",
+    "lodash.findindex": "^4.6.0",
+    "lodash.get": "^4.4.2",
+    "marko": "^4.14.20",
+    "marko-i18next": "^0.2.1",
+    "pino": "^5.10.8",
+    "superagent": "^4.1.0",
+    "test": "^0.6.0",
+    "test-certs": "^1.0.1",
+    "serve-favicon": "^2.5.0",
+    "uk-modulus-checking": "0.1.0",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "lasso": "^3.1.2",
+    "marko": "^4.7.5"
+  },
+  "devDependencies": {
+    "ava": "^1.1.0",
+    "aws-sdk-mock": "^4.3.0",
+    "cheerio": "^1.0.0-rc.2",
+    "nock": "^10.0.6",
+    "nyc": "^13.1.0",
+    "pretty": "^2.0.0",
+    "sinon": "^7.2.3",
+    "test-certs": "^1.0.1",
+    "timekeeper": "^2.1.2",
+    "xo": "^0.24.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "nyc ava && xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.mgmt.rbcdwp.net:bereavement-support-payment/claim-manager/claims-frontend.git"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 80,
+    "statements": 80,
+    "functions": 80,
+    "branches": 80,
+    "reporter": [
+      "cobertura",
+      "lcov",
+      "text"
+    ],
+    "exclude": [
+      "test"
+    ]
+  },
+  "xo": {
+    "space": true,
+    "env": [
+      "node",
+      "browser",
+      "jquery"
+    ],
+    "ignores": [
+      "./**/*.marko.js"
+    ]
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js",
+      "!test/constants/**"
+    ],
+    "verbose": true
+  }
+}

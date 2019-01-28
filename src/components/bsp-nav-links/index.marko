@@ -1,0 +1,37 @@
+static const leadingSlash = /^\/+/;
+
+static function stripSlash(url) {
+  return String(url).replace(leadingSlash, '') || 'home';
+}
+
+static function getPath(global) {
+  if (global.req && global.req.originalUrl) {
+    const queryIndex = global.req.originalUrl.indexOf('?');
+
+    if (queryIndex > -1) {
+      return global.req.originalUrl.substr(0, queryIndex)
+    }
+
+    return global.req.originalUrl;
+  }
+
+  return 'unknown';
+}
+
+<if(input.links && input.links.length > 0)>
+  <nav.nav-bar>
+    $ const currentPath = getPath(out.global);
+    $ const journeyFrom = 'link-inbound:from-' + stripSlash(currentPath);
+
+    <ul.nav-list>
+      <for(link in input.links)>
+        <li.nav-list-item>
+          <a href=link.href class=['nav-link', (link.href === currentPath && 'nav-link-active')]
+            data-test-hook=link.title.toLowerCase().replace(' ','-')>
+            ${link.title}
+          </a>
+        </li>
+      </for>
+    </ul>
+  </nav>
+</if>

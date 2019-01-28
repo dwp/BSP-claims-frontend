@@ -1,0 +1,10 @@
+{
+  "title": "Disallow claim - $t(app:serviceName)",
+  "heading": "You are about to disallow this claim",
+  "disallowMessageText": "The deceased did not pay enough National Insurance contributions.",
+  "form": {
+    "submit": "Disallow claim"
+  },
+  "back":"Back",
+  "cancel": "Cancel"
+}

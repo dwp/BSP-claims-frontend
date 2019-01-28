@@ -1,0 +1,34 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('delete:title')>
+
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/tasks-to-complete`>
+          <i18n-message key="delete:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="delete:heading"/>
+        </h1>
+        <p data-test-hook="info-message">
+          <i18n-message key="delete:deleteMessageText"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/delete` method="post">
+          <bsp-csrf-token/>
+
+          <button.button-warning.form-group type="submit">
+            <i18n-message key="delete:form.submit"/>
+          </button>
+        </form>
+
+        <a.link-cancel href=`/claim/${data.claimId}/tasks-to-complete`>
+          <i18n-message key="delete:cancel"/>
+        </a>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

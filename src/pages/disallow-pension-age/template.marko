@@ -1,0 +1,39 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+$ const {day, month, year} = data;
+
+<bsp-layout page-title=i18n('disallowed-pension-age:title')>
+
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="/start-new-claim">
+          <i18n-message key="disallowed-pension-age:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="disallowed-pension-age:heading"/>
+        </h1>
+        <p>
+          <i18n-message key="disallowed-pension-age:disallowMessageText"
+            day=day month=month year=year/>
+        </p>
+
+        <form action="/claim/disallow-claim-state-pension-age" method="post">
+          <bsp-csrf-token/>
+
+          <button.button-warning.form-group type="submit">
+            <i18n-message key="disallowed-pension-age:form.submit"/>
+          </button>
+        </form>
+
+        <a.link-cancel href="/start-new-claim">
+          <i18n-message key="disallowed-pension-age:cancel"/>
+        </a>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

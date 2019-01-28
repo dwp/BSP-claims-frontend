@@ -1,0 +1,7 @@
+@import "colours";
+
+.alert-red {
+  background-color: lighten( $error-colour, 58% );
+  border-color: $error-colour;
+  margin-top: 1em;
+}

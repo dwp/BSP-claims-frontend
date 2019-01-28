@@ -1,0 +1,30 @@
+{
+  "title": "This claimant has already applied for Bereavement Support Payment - $t(app:serviceName)",
+  "back": "Back",
+  "currentClaim": {
+    "heading": "This claimant gets Bereavement Support Payment using the deceased person's details",
+    "body": "A claim using these details has already been allowed."
+  },
+  "activeSchedule": {
+    "heading": "This claimant already has an active payment schedule",
+    "body": "Check the claim details in CAMlite."
+  },
+  "unfinishedClaim": {
+    "heading": "This claimant has a claim in progress using the deceased person's details",
+    "body": "You can continue with the existing claim, but you cannot start a new one.",
+    "legend": "Do you want to continue with the existing claim?",
+    "labelYes": "Yes",
+    "labelNo": "No",
+    "errors": {
+      "presence": "Select whether you want to continue with the existing claim."
+    }
+  },
+  "claimInfo": {
+    "heading": "Previous claims",
+    "allowed": "Allowed claim",
+    "unfinished": "Unfinished claim",
+    "claimant": "Claimant",
+    "deceased": "Deceased",
+    "submit": "Continue"
+  }
+}

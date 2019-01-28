@@ -1,0 +1,44 @@
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+
+<bsp-layout page-title=i18n('child-benefit:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="tasks-to-complete">
+          <i18n-message key="child-benefit:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="child-benefit:heading"/>
+        </h1>
+
+        <form action=`/claim/${data.claimId}/verify-child-benefit` method="post" novalidate>
+          <gov-radios name="childrenCHIBinCBOL" legend=i18n('child-benefit:form.childrenCHIBinCBOL.heading')
+            value=values.childrenCHIBinCBOL error=errors.childrenCHIBinCBOL hide-legend=true>
+            <@radio label=i18n('child-benefit:form.childrenCHIBinCBOL.labelYes')
+              value="true" reveal="child-benefit-number"/>
+            <@radio label=i18n('child-benefit:form.childrenCHIBinCBOL.labelNo')
+              value="false"/>
+          </gov-radios>
+
+          <div.panel.panel-border-narrow.js-hidden id="child-benefit-number">
+            <gov-input name="childrenCHIB" label=i18n('child-benefit:form.childrenCHIB.label')
+              value=values.childrenCHIB error=errors.childrenCHIB/>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="child-benefit:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

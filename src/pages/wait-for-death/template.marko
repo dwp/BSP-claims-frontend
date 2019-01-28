@@ -1,0 +1,44 @@
+<i18n-var/>
+
+$ const {errors = {}, values = {}} = data;
+
+<bsp-layout page-title=i18n('wait-for-death:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/verify-death`>
+          <i18n-message key="wait-for-death:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="wait-for-death:heading"/>
+        </h1>
+
+        <p.form-section.text>
+          <i18n-message key="wait-for-death:body"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/verify-death/wait-for-evidence` method="post" novalidate>
+          <gov-radios name="wait" legend=i18n('wait-for-death:form.wait.legend')
+            value=values error=errors.wait layout="stacked">
+            <@radio label=i18n('wait-for-death:form.wait.labelYes') value="Y" reveal="await-evidence"/>
+            <@radio label=i18n('wait-for-death:form.wait.labelNo') value="N"/>
+          </gov-radios>
+          <div.panel.panel-border-narrow.js-hidden id="await-evidence">
+            <i18n-message key="wait-for-death:form.wait.hint" full-name=data.fullName/>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="wait-for-death:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

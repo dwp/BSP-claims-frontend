@@ -1,0 +1,21 @@
+@import "colours";
+
+.alert-default {
+  background-color: lighten( $link-hover-colour, 48% );
+  border-color: $link-hover-colour;
+}
+
+.schedule-logs {
+  margin-bottom: 3.1578em;
+
+  dt, dd {
+    display: inline;
+  }
+  dt:after {
+    content: ':\00a0';
+  }
+  dd:after {
+    content: '';
+    display: block;
+  }
+}

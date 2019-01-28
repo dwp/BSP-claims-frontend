@@ -1,0 +1,322 @@
+import getDisallowReason from '../../utils/get-disallow-reason';
+import searchChangeHistory from '../../utils/search-change-history';
+import splitDate from '../../utils/split-date';
+import {DISALLOW_REL, DISALLOW_REL_EVIDENCE, DISALLOW_DEATH_EVIDENCE, CHANGE_HISTORY_DEATH_NOT_VERIFIED, CHANGE_HISTORY_DEATH_VERIFIED, CHANGE_HISTORY_ADD_PAYMENT_DETAILS, CHANGE_HISTORY_NO_PAYMENT_DETAILS} from '../../lib/constants';
+
+$ const claim = input.claim || {};
+$ const headingLevel = 'h' + (input.headingLevel || '2');
+$ const {claimantDetails, partnerDetails, eligibilityCriteria, paymentAccount} = claim;
+
+<i18n-var/>
+
+<section.display-wrapper>
+  <${headingLevel} class="heading-medium display-header">
+    <i18n-message key="claim-details:claimantDetails"/>
+  </>
+  <if(claimantDetails)>
+    <bsp-summary>
+      <@item name=i18n('claim-details:title')>
+        ${claimantDetails.title}
+      </@item>
+      <@item name=i18n('claim-details:fullName')>
+        ${claimantDetails.fullName}
+      </@item>
+      <@item name=i18n('claim-details:nino')>
+        <bsp-nino nino=claim.nino/>
+      </@item>
+      <@item name=i18n('claim-details:dateOfBirth')>
+        ${i18n('date:dayMonthYear', splitDate(claimantDetails.dateOfBirth))}
+      </@item>
+      <@item name=i18n('claim-details:sex')>
+        ${i18n('claim-details:${String(claimantDetails.sex).toLowerCase()}')}
+      </@item>
+    </bsp-summary>
+  </if>
+</section>
+
+<section.display-wrapper>
+  <${headingLevel} class="heading-medium display-header">
+    <i18n-message key="claim-details:partnerDetails"/>
+  </>
+  <if(partnerDetails)>
+    <bsp-summary>
+      <@item name=i18n('claim-details:partnerTitle') hook="partner-title">
+        ${partnerDetails.title}
+      </@item>
+      <@item name=i18n('claim-details:partnerFullName') hook=`partner-full-name`>
+        ${partnerDetails.fullName}
+      </@item>
+      <@item name=i18n('claim-details:partnerNino') hook=`partner-national-insurance-number`>
+        <bsp-nino nino=partnerDetails.nino/>
+      </@item>
+      <@item name=i18n('claim-details:dateOfDeath')>
+        ${i18n('date:dayMonthYear', splitDate(partnerDetails.dateOfDeath))}
+      </@item>
+    </bsp-summary>
+  </if>
+</section>
+
+<section.display-wrapper>
+  <${headingLevel} class="heading-medium display-header">
+    <i18n-message key="claim-details:dateOfClaim"/>
+  </>
+  <bsp-summary>
+    <@item name=i18n('claim-details:dateOfClaim')>
+      ${i18n('date:dayMonthYear', splitDate(claim.dateOfClaim))}
+    </@item>
+  </bsp-summary>
+</section>
+
+<if(paymentAccount)>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:paymentDetails"/>
+    </>
+    <bsp-summary>
+      <@item name=i18n('claim-details:nameOnAccount')>
+        ${paymentAccount.nameOnAccount}
+      </@item>
+      <@item name=i18n('claim-details:sortCode')>
+        ${paymentAccount.sortCode}
+      </@item>
+      <@item name=i18n('claim-details:accountNumber')>
+        ${paymentAccount.accountNumber}
+      </@item>
+      <if(paymentAccount.rollNumber)>
+        <@item name=i18n('claim-details:rollNumber')>
+          ${paymentAccount.rollNumber}
+        </@item>
+      </if>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="payment-details">
+        <i18n-message key="claim-details:changePaymentDetails"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+    <else-if(claim.schedule && claim.schedule.status === "Active")>
+      <a.change-link href="change-payment-details">
+        <i18n-message key="claim-details:changePaymentDetails"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </else-if>
+  </section>
+</if>
+
+<if(eligibilityCriteria && eligibilityCriteria.dependentChildren !== null)>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:dependentChildren"/>
+    </>
+    <bsp-summary>
+      <@item name=i18n('claim-details:dependentChildren')>
+        ${i18n(`claim-details:dependentChildren${eligibilityCriteria.dependentChildren ? 'Yes' : 'No'}`)}
+      </@item>
+      <@item name=i18n('claim-details:pregnantAtDateOfDeath')>
+        ${i18n(`claim-details:pregnantAtDateOfDeath${eligibilityCriteria.pregnantAtDateOfDeath ? 'Yes' : 'No'}`)}
+      </@item>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="dependent-children">
+        <i18n-message key="claim-details:changeDependantChildren"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+    <else-if(claim.schedule && claim.schedule.status === "Active" && claim.schedule.rate !== '73132')>
+    $ const childLink = eligibilityCriteria.dependentChildren  && !eligibilityCriteria.pregnantAtDateOfDeath ? "change-pregnant" : "change-dependent-children";
+      <a.change-link
+        data-test-hook="change-dependent-children"
+        href=`${childLink}`>
+        <i18n-message key="claim-details:changeDependantChildren"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </else-if>
+  </section>
+</if>
+
+$ const attemptedDeathVerification = searchChangeHistory(claim.changeInfoList, CHANGE_HISTORY_DEATH_VERIFIED, CHANGE_HISTORY_DEATH_NOT_VERIFIED);
+
+<!-- verification section -->
+<!-- marriage verification section -->
+<if((eligibilityCriteria && eligibilityCriteria.marriedAtDateOfDeath !== null))>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:marriage"/>
+    </>
+    <bsp-summary>
+      <if(eligibilityCriteria && eligibilityCriteria.marriedAtDateOfDeath === true)>
+        <if(claim.marriageDate)>
+          <@item hook='married' name=i18n('claim-details:evidenceSource')>
+            <ul>
+              <if(claim.marriageVerifiedByCert)>
+                <li>
+                  ${i18n('claim-details:evidence.certificate')}
+                </li>
+              </if>
+              <if(claim.marriageVerifiedInCIS)>
+                <li>
+                  ${i18n('claim-details:evidence.CIS')}
+                </li>
+              </if>
+              <if(claim.marriageVerifiedInNIRS)>
+                <li>
+                  ${i18n('claim-details:evidence.eNIRS')}
+                </li>
+              </if>
+            </ul>
+          </@item>
+        </if>
+        <if(claim.marriageDate)>
+          <@item hook='marriedDate' name=i18n('claim-details:date')>
+            ${i18n('date:dayMonthYear', splitDate(claim.marriageDate))}
+          </@item>
+        </if>
+        <else-if(getDisallowReason(claim) === DISALLOW_REL_EVIDENCE)>
+          <@item hook='married' name=i18n('claim-details:evidenceSource')>
+            ${i18n(`decision:disallowed.marriage${DISALLOW_REL_EVIDENCE}`)}
+          </@item>
+        </else-if>
+        <else>
+          <@item hook='married' name=i18n('claim-details:evidenceSource')>
+            ${i18n('claim-details:missing')}
+          </@item>
+        </else>
+      </if>
+      <else-if(eligibilityCriteria && eligibilityCriteria.marriedAtDateOfDeath === false)>
+        <@item hook='married' name=i18n('claim-details:evidenceSource')>
+          ${i18n(`decision:disallowed.marriage${DISALLOW_REL}`)}
+        </@item>
+      </else-if>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="verify-relationship">
+        <i18n-message key="claim-details:changeRelationship"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+  </section>
+</if>
+<!-- date of death verification section -->
+<if(attemptedDeathVerification)>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:death"/>
+    </>
+    <bsp-summary>
+      <if(claim.deathDate)>
+        <@item hook='death' name=i18n('claim-details:evidenceSource')>
+          <ul>
+            <if(claim.deathVerifiedByCert)>
+              <li>
+                ${i18n('claim-details:evidence.certificate')}
+              </li>
+            </if>
+            <if(claim.deathVerifiedInCIS)>
+              <li>
+                ${i18n('claim-details:evidence.CIS')}
+              </li>
+            </if>
+            <if(claim.deathVerifiedInNIRS)>
+              <li>
+                ${i18n('claim-details:evidence.eNIRS')}
+              </li>
+            </if>
+            <if(claim.deathVerifiedByBS)>
+              <li>
+                ${i18n('claim-details:evidence.bereavementService')}
+              </li>
+            </if>
+          </ul>
+        </@item>
+      </if>
+      <if(claim.deathDate)>
+        <@item hook='deathDate' name=i18n('claim-details:date')>
+          ${i18n('date:dayMonthYear', splitDate(claim.deathDate))}
+        </@item>
+      </if>
+      <else-if(getDisallowReason(claim) === DISALLOW_DEATH_EVIDENCE)>
+        <@item hook='death' name=i18n('claim-details:death')>
+          ${i18n('claim-history:ClaimDisallowedDeathNotVerified.body')}
+        </@item>
+      </else-if>
+      <else-if(attemptedDeathVerification)>
+        <@item hook='death' name=i18n('claim-details:evidenceSource')>
+          ${i18n('claim-details:missing')}
+        </@item>
+      </else-if>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="verify-death">
+        <i18n-message key="claim-details:changeDeath"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+  </section>
+</if>
+<!-- NI conts verification section -->
+<if(eligibilityCriteria && (eligibilityCriteria.sufficientNIContributions || eligibilityCriteria.sufficientNIContributions === false))>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:niConts"/>
+    </>
+    <bsp-summary>
+      <if(eligibilityCriteria && eligibilityCriteria.sufficientNIContributions)>
+        <@item hook='niConts' name=i18n('claim-details:year')>
+          ${i18n('claim-details:enoughNiConts', {niContsYear: claim.niContsYear})}
+        </@item>
+      </if>
+      <else-if(eligibilityCriteria && eligibilityCriteria.sufficientNIContributions === false)>
+        <@item hook='niConts' name=i18n('claim-details:evidenceSource')>
+          ${i18n('claim-details:noNiConts')}
+        </@item>
+      </else-if>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="verify-national-insurance">
+        <i18n-message key="claim-details:changeNIConts"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+  </section>
+</if>
+<!-- child benefit verification section -->
+<if(claim.childrenCHIBinCBOL)>
+  <section.display-wrapper>
+    <${headingLevel} class="heading-medium display-header">
+      <i18n-message key="claim-details:childBenefit"/>
+    </>
+    <bsp-summary>
+      <if(claim.childrenCHIBinCBOL === 'false')>
+        <@item name=i18n('claim-details:childBenefitNumber')>
+          ${i18n('claim-details:missing')}
+        </@item>
+      </if>
+      <else-if(claim.childrenCHIB)>
+        <@item name=i18n('claim-details:childBenefitNumber')>
+          ${claim.childrenCHIB}
+        </@item>
+      </else-if>
+    </bsp-summary>
+    <if(!claim.decision)>
+      <a.change-link href="verify-child-benefit">
+        <i18n-message key="claim-details:changeChildBenefit"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </if>
+    <else-if(claim.schedule && claim.schedule.status === "Active" && claim.schedule.rate !== '73132')>
+      <a.change-link href="change-child-benefit">
+        <i18n-message key="claim-details:changeChildBenefit"
+          hide-start="<span class=\"visually-hidden\">"
+          hide-end="</span>"/>
+      </a>
+    </else-if>
+  </section>
+</if>

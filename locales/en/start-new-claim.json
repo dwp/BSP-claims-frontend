@@ -1,0 +1,101 @@
+{
+  "title": "$t(start-new-claim:heading) - $t(app:serviceName)",
+  "changeTitle": "$t(start-new-claim:changeHeading) - $t(app:serviceName)",
+  "heading": "Start a new claim",
+  "changeHeading": "Claim details",
+  "claimantDetails": "Claimant details",
+  "form": {
+    "claimantDetails": {
+      "heading": "Claimant details"
+    },
+    "title": {
+      "label": "Title",
+      "errors": {
+        "presence": "Enter the claimant’s title.",
+        "format": "Enter the claimant’s title without {{-invalid}}."
+      }
+    },
+    "fullName": {
+      "label": "Full name",
+      "errors": {
+        "presence": "Enter the claimant’s full name.",
+        "format": "Enter the claimant’s full name without {{-invalid}}."
+      }
+    },
+    "nino": {
+      "label": "National Insurance number",
+      "errors": {
+        "presence": "Enter the claimant’s National Insurance number.",
+        "format": "Enter the claimant’s National Insurance number - for example, ‘QQ123456A’.",
+        "ninoMatchPartner": "The claimant’s National Insurance number must not be the same as the deceased’s."
+      }
+    },
+    "partnerDetails": {
+      "heading": "Deceased details"
+    },
+    "partnerTitle": {
+      "label": "Title",
+      "errors": {
+        "presence": "Enter the deceased’s title.",
+        "format": "Enter the deceased’s title without {{-invalid}}."
+      }
+    },
+    "partnerFullName": {
+      "label": "Full name",
+      "errors": {
+        "presence": "Enter the deceased’s full name.",
+        "format": "Enter the deceased’s full name without {{-invalid}}."
+      }
+    },
+    "partnerNino": {
+      "label": "National Insurance number",
+      "errors": {
+        "presence": "Enter the deceased’s National Insurance number.",
+        "format": "Enter the deceased’s National Insurance number - for example, ‘QQ123456A’.",
+        "ninoMatchClaimant": "The deceased’s National Insurance number must not be the same as the claimant’s."
+      }
+    },
+    "dateOfDeath": {
+      "legend": "What date did they die?",
+      "errors": {
+        "presence": "Enter the deceased’s date of death.",
+        "format": "Enter a valid date of death - for example, 16 08 1975.",
+        "future": "You cannot enter a future date of death.",
+        "eligibility": "The date of death must be on or after 6 April 2017.",
+        "afterDateOfClaim": "The date of death must be before the date of claim.",
+        "beforeDateOfBirth": "The date of death must be after the date of birth."
+      }
+    },
+    "dateOfBirth": {
+      "legend": "Date of birth",
+      "errors": {
+        "presence": "Enter the claimant’s date of birth.",
+        "format": "Enter a valid date of birth - for example, 16 08 1975.",
+        "future": "You cannot enter a future date of birth.",
+        "afterDateOfClaim": "The date of birth must be before the date of claim.",
+        "afterDateOfDeath": "The date of birth must be before the date of death."
+      }
+    },
+    "sex": {
+      "legend": "Sex",
+      "hint": "Needed to calculate State Pension age",
+      "labelFemale": "Female",
+      "labelMale": "Male",
+      "errors": {
+        "presence": "Choose ‘Male’ or ‘Female’."
+      }
+    },
+    "dateOfClaim": {
+      "legend": "Date of claim",
+      "errors": {
+        "presence": "Enter a date of claim.",
+        "format": "Enter a valid date of claim - for example, 16 11 2016.",
+        "future": "You cannot enter a future date of claim.",
+        "eligibility": "The date of claim must be on or after 6 April 2017.",
+        "beforeDateOfBirth": "The date of claim must be after the date of birth.",
+        "beforeDateOfDeath": "The date of claim must be after the date of death."
+      }
+    },
+    "submit": "Continue"
+  }
+}

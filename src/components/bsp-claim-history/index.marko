@@ -1,0 +1,38 @@
+import splitDate from '../../utils/split-date';
+
+$ const i18n = out.global.req.t;
+
+<h2.heading-medium>
+  ${i18n('claim-history:heading')}
+</h2>
+
+<ol.claim-history>
+  <for(item in input.history)>
+    <li.claim-history-item>
+      $ const head = i18n(`claim-history:${item.changeDescription}.heading`);
+      $ const body = (item.effectiveDate === null || item.effectiveDate === undefined ?
+        i18n(`claim-history:${item.changeDescription}.body`) :
+        i18n(`claim-history:${item.changeDescription}.body`, splitDate(item.effectiveDate)));
+
+      <h3.claim-history-title>
+        ${head}
+      </h3>
+      <p.claim-history-meta>
+        <if(item.agentName && !item.agentName.includes('system_agent'))>
+          <span.claim-history-agent data-staff-id=item.agentIdentifier>
+            $!{i18n('claim-history:byUserOnDate', {user: item.agentName})}
+          </span>
+        </if>
+        <span.claim-history-date>
+          ${i18n('date:dayMonthYear', splitDate(item.created))}
+        </span>
+      </p>
+
+      <if(body)>
+        <p.claim-history-body>
+          ${body}
+        </p>
+      </if>
+    </li>
+  </for>
+</ol>

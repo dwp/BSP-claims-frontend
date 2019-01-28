@@ -1,0 +1,22 @@
+{
+  "back": "Back",
+  "title": "Change Child Benefit - $t(app:serviceName)",
+  "heading": "Does the claimant have a Child Benefit number?",
+  "form": {
+    "childrenCHIBinCBOL": {
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether the claimant has a Child Benefit number."
+      }
+    },
+    "childrenCHIB": {
+      "label": "Child Benefit number",
+      "errors": {
+        "presence": "Enter a Child Benefit number.",
+        "format": "Enter a Child Benefit number - for example, ‘12345678AB’."
+      }
+    },
+    "submit": "Continue"
+  }
+}

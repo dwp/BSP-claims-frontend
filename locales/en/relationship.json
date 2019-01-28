@@ -1,0 +1,42 @@
+{
+  "title": "Verify relationship - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Does the claimant say they were married or in a civil partnership at the time of death?",
+  "form": {
+    "marriedAtDateOfDeath": {
+      "legend": "$t(relationship:heading)",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether the claimant says they were married or in a civil partnership at the time of death."
+      }
+    },
+    "seenEvidence": {
+      "legend": "Have you seen evidence of this?",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether you have seen evidence of a marriage or civil partnership."
+      }
+    },
+    "evidence": {
+      "legend": "Where did you see evidence?",
+      "hint": "Select all that apply",
+      "labelCertificate": "On a marriage or civil partnership certificate",
+      "labelCIS": "In the Customer Information System (CIS)",
+      "labelNIRS": "In the National Insurance Recording System (NIRS)",
+      "errors": {
+        "presence": "Select where you saw evidence of a marriage or civil partnership."
+      }
+    },
+    "marriageDate": {
+      "legend": "Date of marriage or civil partnership",
+      "errors": {
+        "presence": "Enter a date of marriage or civil partnership.",
+        "format": "Enter a valid date of marriage or civil partnership - for example, 16 08 1975.",
+        "future": "You cannot enter a future date of marriage or civil partnership."
+      }
+    },
+    "submit": "Continue"
+  }
+}

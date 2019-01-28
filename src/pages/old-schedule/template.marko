@@ -1,0 +1,141 @@
+import splitDate from '../../utils/split-date'
+import findLogAccounts from '../../utils/find-log-accounts';
+
+<bsp-layout>
+
+  <@content>
+
+    $ const {schedule} = data.claim || {};
+    $ const {bankDetailsList, changeHistoryList} = schedule || [];
+
+    <i18n-var/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+
+        <bsp-claim-header status=schedule.status
+          name=schedule.name nino=schedule.nino/>
+
+        <div.alert-default.panel.panel-border-narrow>
+          <h2.heading-small data-test-hook="payment-schedule-only"><i18n-message key="schedule-old:paymentSchedule"/></h2>
+          <p><i18n-message key="schedule-old:paymentScheduleBody"/><br/>
+          <i18n-message key="schedule-old:paymentScheduleCam"/></p>
+        </div>
+
+        <if(changeHistoryList && changeHistoryList.length > 0)>
+          <div.schedule-logs>
+            <h2.heading-large>
+              <i18n-message key="schedule-old:log.heading"/>
+            </h2>
+            <for(change in changeHistoryList)>
+              $ const actionDate = new Date(change.actionDate);
+              $ const effectiveDate = new Date(change.effectiveDate);
+
+              <span>
+                <h3.heading-small>
+                  <i18n-message key=`schedule-old:log.logHeadings.${change.action}`
+                    day=actionDate.getDate()
+                    month=`$t(date:months.${actionDate.getMonth()+1})`
+                    year=actionDate.getFullYear()/>
+                </h3>
+                <if(change.action === 'UpdatePaymentAccountDetails')>
+                  <dl.panel.panel-border-narrow>
+                    $ const bankDetails = findLogAccounts(change.changeSummary, bankDetailsList);
+
+                    <dt>
+                      <i18n-message key="schedule-old:log.reasons.UpdatePaymentAccountDetails.from"/>
+                    </dt>
+                    <dd>
+                      ${bankDetails.from.accountName}, ${bankDetails.from.accountNumber}, ${bankDetails.from.sortCode}
+                    </dd>
+                    <dt>
+                      <i18n-message key=`schedule-old:log.reasons.UpdatePaymentAccountDetails.to`/>
+                    </dt>
+                    <dd>
+                      ${bankDetails.to.accountName}, ${bankDetails.to.accountNumber}, ${bankDetails.to.sortCode}
+                    </dd>
+                  </dl>
+                </if>
+                <else>
+                  <p.panel.panel-border-narrow>
+                    <if(change.Action === 'Active')>
+                    <i18n-message key="schedule-old:log.reasons.fromClerical"
+                      count=parseInt(change.changeSummary.split(':')[1], 10)/>
+                    </if>
+                    <else>
+                    <i18n-message key=`schedule-old:log.reasons.${change.changeSummary}`
+                      day=effectiveDate.getDate()
+                      month=`$t(date:months:${effectiveDate.getMonth()+1})`
+                      year=effectiveDate.getFullYear()/>
+                    </else>
+                  </p>
+                </else>
+              </span>
+            </for>
+          </div>
+        </if>
+
+        <h2.heading-small>
+          <i18n-message key="schedule:activeBankDetails.paymentDetails"/>
+        </h2>
+        <if(schedule)>
+          <bsp-summary>
+            <@item name=i18n("schedule:activeBankDetails.accountName")>
+              ${schedule.activeBankDetails.accountName}
+            </@item>
+            <@item name=i18n(`schedule:activeBankDetails.sortCode`)>
+              ${schedule.activeBankDetails.sortCode}
+            </@item>
+            <@item name=i18n(`schedule:activeBankDetails.accountNumber`)>
+              ${schedule.activeBankDetails.accountNumber}
+            </@item>
+            <if(schedule.activeBankDetails.rollNumber)>
+              <@item name=i18n(`schedule:activeBankDetails.rollNumber`)>
+                ${schedule.activeBankDetails.rollNumber}
+              </@item>
+            </if>
+            $ const bankType = schedule.activeBankDetails.rollNumber ? "Building" : "Bank";
+            <@item name=i18n(`schedule:activeBankDetails.typeOfAccount`)>
+              <i18n-message key=`schedule:activeBankDetails.typeOfAccount${bankType}`/>
+            </@item>
+          </bsp-summary>
+        </if>
+
+        <h2 class="heading-small" data-test-hook="rate-heading">
+          <i18n-message key="schedule:rate.title"/>
+        </h2>
+
+        <p.data-summary-paragraph data-test-hook="rate-body">
+          <i18n-message key=`schedule:rate.${schedule.rate}`/>
+        </p>
+
+      </div>
+    </div>
+
+
+    <div.grid-row>
+      <div.column-half>
+        <bsp-payment-list payments=schedule.issuedPayments
+          heading="schedule:issuedPayment.heading"
+          due-message="schedule:issuedPayment.duePaymentMessage"
+          message="schedule:issuedPayment.paymentMessage"
+          empty-message="schedule:issuedPayment.emptyMessage"
+          cps-label=true
+          hook="paid-payments"/>
+      </div>
+
+      $ const statusHeading = schedule.status === "Stopped" ? "preventedPayment" : "plannedPayment"
+
+      <div.column-half>
+        <bsp-payment-list payments=schedule.plannedPayments
+          heading=`schedule:${statusHeading}.heading`
+          due-message="schedule:plannedPayment.duePaymentMessage"
+          message="schedule:plannedPayment.paymentMessage"
+          empty-message="schedule:plannedPayment.emptyMessage"
+          hook="planned-payments"/>
+      </div>
+    </div>
+
+    </@content>
+
+</bsp-layout>

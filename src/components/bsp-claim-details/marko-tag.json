@@ -1,0 +1,7 @@
+{
+  "@claim": {
+    "required": true,
+    "type": "object"
+  },
+  "@heading-level": "string"
+}

@@ -1,0 +1,34 @@
+{
+  "title": "$t(stop:heading) - $t(app:serviceName)",
+  "heading": "Why do you need to prevent payments?",
+  "back": "Back",
+  "form": {
+    "reason": {
+      "labelDied": "Claimant died",
+      "labelPrison": "Claimant imprisoned",
+      "labelFraud": "Fraudulent claim",
+      "labelError": "Claim set up in error",
+      "labelClerical": "The claim needs to be paid manually",
+      "errors": {
+        "presence": "Choose a reason for stopping the schedule."
+      }
+    },
+    "deathDate": {
+      "legend": "What date did they die?",
+      "errors": {
+        "presence": "Enter a date of death.",
+        "format": "Enter a valid date of death - for example, 20 04 2017.",
+        "future": "You cannot enter a future date of death."
+      }
+    },
+    "prisonDate": {
+      "legend": "What date were they imprisoned?",
+      "errors": {
+        "presence": "Enter a date of imprisonment.",
+        "format": "Enter a valid date of imprisonment - for example, 20 04 2017.",
+        "future": "You cannot enter a future date of imprisonment."
+      }
+    },
+    "submit": "Prevent payments"
+  }
+}

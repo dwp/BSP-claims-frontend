@@ -1,0 +1,45 @@
+{
+  "title": "View payment schedule - $t(app:serviceName)",
+  "activeBankDetails": {
+    "paymentDetails": "Payment details",
+    "accountName": "Name on account",
+    "sortCode": "Sort code",
+    "accountNumber": "Account number",
+    "rollNumber": "Building society roll number",
+    "typeOfAccount": "Type of account",
+    "typeOfAccountBank": "Bank account",
+    "typeOfAccountBuilding": "Building society account"
+  },
+  "rate": {
+    "title": "Rate",
+    "73132": "Higher",
+    "73131": "Standard"
+  },
+  "plannedPayment": {
+    "heading": "Planned payments",
+    "duePaymentMessage": "<time>Due {{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "paymentMessage": "<time>{{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "emptyMessage": "No payments due."
+  },
+  "issuedPayment": {
+    "heading": "Payments",
+    "duePaymentMessage": "<time>Due {{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "paymentMessage": "<time>{{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "emptyMessage": "No payments issued."
+  },
+  "preventedPayment": {
+    "heading": "Prevented payments",
+    "duePaymentMessage": "<time>Due {{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "paymentMessage": "<time>{{date}}</time> <strong class=\"bold\">{{value}}</strong>",
+    "emptyMessage": "No payments due.",
+    "link": "Prevent payments"
+  },
+  "StandardInitial": "Initial payment",
+  "HigherInitial": "Initial payment",
+  "StandardMonthly": "Backdated monthly payments",
+  "HigherMonthly": "Backdated monthly payments",
+  "sentToCps": "Sent to Central Payment System",
+  "accountNumber": "Paid to account number",
+  "BackdatedInitialUprating": "Backdated initial payment",
+  "BackdatedMonthlyUprating": "Backdated monthly payments"
+}

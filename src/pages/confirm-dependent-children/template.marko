@@ -1,0 +1,82 @@
+<i18n-var/>
+
+$ const {changeDetails} = data;
+
+
+<bsp-layout page-title=i18n('confirm-dependent-children:title')>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`${data.backLink}`>
+          <i18n-message key="confirm-dependent-children:back"/>
+        </a>
+        <if (data.isSame || changeDetails.pregnantAtDateOfDeath === 'false' && changeDetails.childrenCHIB == false)>
+          <div.alert-red.panel.panel-border-narrow>
+            <h2.heading-small><i18n-message key="confirm-dependent-children:willNotChange"/></h2>
+            <if (data.isSame)>
+              <p><i18n-message key="confirm-dependent-children:willNotChangeBody"/></p>
+            </if>
+            <else>
+              <p><i18n-message key="confirm-dependent-children:changedButWillNotChangeBody"/></p>
+            </else>
+          </div>
+        </if>
+
+        <h1.heading-large>
+          <i18n-message key="confirm-dependent-children:heading"/>
+        </h1>
+
+        <h2 class="heading-medium display-header">
+          <i18n-message key="confirm-dependent-children:childrenDetails"/>
+        </h2>
+        <bsp-summary>
+          <@item name=i18n('confirm-dependent-children:dependentChildren')>
+            ${i18n(`confirm-dependent-children:dependentChildren${changeDetails.dependentChildren === 'true'  ? 'Yes' : 'No'}`)}
+          </@item>
+          <@item name=i18n('confirm-dependent-children:pregnantAtDateOfDeath')>
+            ${i18n(`confirm-dependent-children:pregnantAtDateOfDeath${changeDetails.pregnantAtDateOfDeath === 'true' ? 'Yes' : 'No'}`)}
+          </@item>
+        </bsp-summary>
+
+        <if(changeDetails.childrenCHIBinCBOL)>
+          <h2 class="heading-medium display-header">
+            <i18n-message key="confirm-dependent-children:childBenefit"/>
+          </h2>
+          <bsp-summary>
+            <@item name=i18n('confirm-dependent-children:childBenefitNumber')>
+            $ const message = changeDetails.childrenCHIB || 'confirm-dependent-children:CHIBMissing'
+              <i18n-message key=message/>
+            </@item>
+          </bsp-summary>
+        </if>
+
+        <if(data.isSame || changeDetails.pregnantAtDateOfDeath === 'false' && changeDetails.childrenCHIB == false)>
+          <if(data.isSame)>
+            <form action=`/claim/${data.claimId}/rate-not-changed` method="post">
+              <bsp-csrf-token/>
+              <button.button type="submit">
+                <i18n-message key="confirm-dependent-children:confirm-same"/>
+              </button>
+            </form>
+          </if>
+          <else>
+            <form action=`/claim/${data.claimId}/confirm-dependent-children` method="post">
+              <bsp-csrf-token/>
+              <button.button type="submit">
+                <i18n-message key="confirm-dependent-children:confirm-same"/>
+              </button>
+            </form>
+          </else>
+        </if>
+        <else>
+          <form action=`/claim/${data.claimId}/confirm-dependent-children` method="post">
+            <bsp-csrf-token/>
+            <button.button type="submit">
+              <i18n-message key="confirm-dependent-children:confirm"/>
+            </button>
+          </form>
+        </else>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

@@ -1,0 +1,39 @@
+# Dependency directory
+node_modules
+
+# Keys and certs
+ssl
+
+# Log files
+log
+*.log*
+
+# .DS_Store files?
+.DS_Store
+
+# Static files, compiled sass, GOV.UK css, js, etc
+static
+
+# Compiled marko templates
+*.marko.js
+
+# Lasso cache
+.cache
+
+# VS Code config
+.vscode
+
+# Istanbul code coverage results
+.nyc_output
+coverage
+.nyc_output/
+
+# Intellij files
+.idea
+claims-frontend.iml
+
+# Sonarqube files
+.scannerwork
+
+# eslint config
+.eslintrc.json

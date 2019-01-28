@@ -1,0 +1,16 @@
+{
+  "title": "$t(wait-for-death:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Evidence needed",
+  "body": "You cannot process this claim until you have seen evidence of death.",
+  "form": {
+    "wait": {
+      "legend": "Do you want to allow more time?",
+      "labelYes": "Yes, wait a bit longer",
+      "labelNo": "No, disallow claim",
+      "errors": "Select whether you want to allow more time.",
+      "hint": "You may need to contact {{full-name}} to remind them to send their evidence"
+    },
+    "submit": "Continue"
+  }
+}

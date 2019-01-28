@@ -1,0 +1,17 @@
+{
+  "title": "$t(decision:{{decision}}.heading) - $t(app:serviceName)",
+  "disallowed": {
+    "heading": "Claim disallowed",
+    "legend": "This claim has been disallowed because:",
+    "marriagenotAsExpected": "the claimant was not married to or in a civil partnership with the deceased at the time of death",
+    "marriagenotVerified": "no evidence of marriage or civil partnership was received",
+    "dateOfBirthnotAsExpected": "the claimant was over State Pension age at the time of death",
+    "deathnotVerified": "no evidence of death was received",
+    "niContsnotAsExpected": "the deceased did not pay enough National Insurance"
+  },
+  "allowed": {
+    "heading": "Claim allowed",
+    "scheduleCreated": "Payment schedule created"
+  },
+  "viewClaim": "View this claim"
+}

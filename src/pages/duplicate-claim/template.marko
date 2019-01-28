@@ -1,0 +1,104 @@
+<i18n-var/>
+
+$ const {values = {}, errors = {}, claim = {}, scheduleId} = data;
+
+<bsp-layout page-title=i18n('duplicate-claim:title')>
+
+  <@content>
+
+    <a.link-back href="/start-new-claim">
+      <i18n-message key="duplicate-claim:back"/>
+    </a>
+
+    <div.grid-row>
+        <if(claim.claimId && scheduleId)>
+          <div.column-two-thirds>
+            <h1.heading-large>
+              <i18n-message key="duplicate-claim:currentClaim:heading"/>
+            </h1>
+            <p><i18n-message key="duplicate-claim:currentClaim:body"/></p>
+            </div>
+          <div.column-third>
+            <h2.heading-medium>
+              <i18n-message key="duplicate-claim:claimInfo:heading"/>
+            </h2>
+            <p.bold><i18n-message key="duplicate-claim:claimInfo:allowed"/></p>
+            <div.panel.panel-border-wide>
+              <p.bold data-test-hook="claimant-info"><i18n-message key="duplicate-claim:claimInfo:claimant"/></p>
+              <p>
+                <span.claim-info-body data-test-hook="claimant-name">${claim.claimantDetails.fullName}</span>
+                <span data-test-hook="claimant-nino">${claim.nino}</span>
+              </p>
+              <p.bold data-test-hook="deceased-info"><i18n-message key="duplicate-claim:claimInfo:deceased"/></p>
+              <p>
+                <span.claim-info-body data-test-hook="deceased-name">${claim.partnerDetails.fullName}</span>
+                <span data-test-hook="deceased-nino">${claim.partnerDetails.nino}</span>
+              </p>
+            </div>
+          </div>
+        </if>
+
+        <if(!claim.claimId && scheduleId)>
+          <div.column-two-thirds>
+            <h1.heading-large>
+              <i18n-message key="duplicate-claim:activeSchedule:heading"/>
+            </h1>
+            <p><i18n-message key="duplicate-claim:activeSchedule:body"/></p>
+          </div>
+        </if>
+        <if(claim.claimId && claim.schedule === null)>
+          <div.column-two-thirds>
+            <h1.heading-large>
+              <i18n-message key="duplicate-claim:unfinishedClaim:heading"/>
+            </h1>
+            <p><i18n-message key="duplicate-claim:unfinishedClaim:body"/></p>
+
+            <form action="/claim/duplicate-claim" method="post" novalidate>
+
+              <gov-radios name="continueClaim"
+                value=values.continueClaim
+                legend=i18n('duplicate-claim:unfinishedClaim:legend')
+                error=errors.presence>
+
+                <@radio label=i18n('duplicate-claim:unfinishedClaim:labelYes')
+                  value="true"/>
+                <@radio label=i18n('duplicate-claim:unfinishedClaim:labelNo')
+                  value="false"/>
+              </gov-radios>
+
+              <bsp-csrf-token/>
+
+              <button.button type="submit">
+                <i18n-message key="duplicate-claim:claimInfo:submit"/>
+              </button>
+            </form>
+          </div>
+
+          <div.column-third>
+            <h2.heading-medium>
+              <i18n-message key="duplicate-claim:claimInfo:heading"/>
+            </h2>
+            <p.bold><i18n-message key="duplicate-claim:claimInfo:unfinished"/></p>
+            <div.panel.panel-border-wide>
+              <p.bold data-test-hook="claimant-info">
+                <i18n-message key="duplicate-claim:claimInfo:claimant"/>
+              </p>
+              <p>
+                <span.claim-info-body data-test-hook="claimant-name">${claim.claimantDetails.fullName}</span>
+                <span data-test-hook="claimant-nino">${claim.nino}</span>
+              </p>
+              <p.bold data-test-hook="deceased-info"><i18n-message key="duplicate-claim:claimInfo:deceased"/></p>
+              <p>
+                <span.claim-info-body data-test-hook="deceased-name">${claim.partnerDetails.fullName}</span>
+                <span data-test-hook="deceased-nino">${claim.partnerDetails.nino}</span>
+              </p>
+            </div>
+          </div>
+        </if>
+
+
+    </div>
+
+  </@content>
+
+</bsp-layout>

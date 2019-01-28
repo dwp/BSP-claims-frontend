@@ -1,0 +1,11 @@
+import spaceNino from '../../utils/space-nino';
+
+<div.claim-heading>
+  <h1.heading-xlarge aria-label=`${input.name} ${spaceNino(input.nino)}`>
+    <span.heading-secondary>${input.name}</span>
+    <bsp-nino nino=input.nino hook="nino"/>
+  </h1>
+  <p class=`claim-status claim-status-${input.status.toLowerCase()}`>
+    <i18n-message key=`claim-header:${input.status}`/>
+  </p>
+</div>

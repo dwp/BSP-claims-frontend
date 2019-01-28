@@ -1,0 +1,6 @@
+{
+  "title": "$t(confirm-claim:heading) - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Confirm claim details",
+  "submit": "Confirm and submit claim"
+}

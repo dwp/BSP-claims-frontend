@@ -1,0 +1,14 @@
+import stringToAttribue from '../../utils/string-to-attribute';
+
+<dl.data-summary>
+  <for(item in input.items)>
+    $ const hook = item.hook || stringToAttribue(item.name);
+
+    <dt.data-summary-key data-test-hook=hook>
+      ${item.name}
+    </dt>
+    <dd.data-summary-value data-test-hook=hook>
+      <${item.renderBody}/>
+    </dd>
+  </for>
+</dl>

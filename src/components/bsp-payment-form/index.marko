@@ -1,0 +1,26 @@
+$ const values = input.values || {};
+$ const errors = input.errors || {};
+
+<i18n-var/>
+
+<gov-radios legend=i18n('payment-details:form.accountType.legend')
+  name="accountType" error=errors.accountType value=values.accountType layout='stacked'>
+  <@radio label=i18n('payment-details:form.accountType.labelBank')
+    value="UKBank" layout='other'/>
+  <@radio label=i18n('payment-details:form.accountType.labelBuilding')
+    value="UKBuildingSociety" reveal="roll-number"/>
+</gov-radios>
+
+<gov-input name="nameOnAccount" label=i18n('payment-details:form.nameOnAccount.label')
+  value=values.nameOnAccount error=errors.nameOnAccount maxlength=35/>
+
+<gov-input name="sortCode" label=i18n('payment-details:form.sortCode.label')
+  value=values.sortCode error=errors.sortCode/>
+
+<gov-input name="accountNumber" label=i18n('payment-details:form.accountNumber.label')
+  value=values.accountNumber error=errors.accountNumber maxlength=8/>
+
+<div id="roll-number" class="js-hidden">
+  <gov-input name="rollNumber" label=i18n('payment-details:form.rollNumber.label')
+    value=values.rollNumber error=errors.rollNumber maxlength=18/>
+</div>

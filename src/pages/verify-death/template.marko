@@ -1,0 +1,59 @@
+import splitDate from '../../utils/split-date';
+
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+$ values.deathDate = values.deathDate && splitDate(values.deathDate);
+
+<bsp-layout page-title=i18n('verify-death:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href="tasks-to-complete">
+          <i18n-message key="verify-death:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="verify-death:heading"/>
+        </h1>
+
+        <form action=`/claim/${data.claimId}/verify-death` method="post" novalidate>
+          <gov-radios name="seenEvidence" legend=i18n('verify-death:form.seenEvidence.legend')
+            value=(values.seenEvidence || values.deathDate && 'true') error=errors.seenEvidence
+            hide-legend=true>
+            <@radio label=i18n('verify-death:form.seenEvidence.labelYes') value="true" reveal="evidence-checks"/>
+            <@radio label=i18n('verify-death:form.seenEvidence.labelNo') value="false"/>
+          </gov-radios>
+          <div.panel.panel-border-narrow.js-hidden id="evidence-checks">
+            <gov-checkboxes legend=i18n('verify-death:form.evidence.legend')
+              body-text=i18n('verify-death:form.evidence.hint') hint=" "
+              name="evidence" error=errors.evidence>
+              <@checkbox name="deathVerifiedByCert" label=i18n('verify-death:form.evidence.labelCertificate')
+                value="true" checked=(values.deathVerifiedByCert === 'true')/>
+              <@checkbox name="deathVerifiedInCIS" label=i18n('verify-death:form.evidence.labelCIS')
+                value="true" checked=(values.deathVerifiedInCIS === 'true')/>
+              <@checkbox name="deathVerifiedInNIRS" label=i18n('verify-death:form.evidence.labelNIRS')
+                value="true" checked=(values.deathVerifiedInNIRS === 'true')/>
+              <@checkbox name="deathVerifiedByBS" label=i18n('verify-death:form.evidence.labelBS')
+                value="true" checked=(values.deathVerifiedByBS === 'true')/>
+            </gov-checkboxes>
+            <gov-date-input legend=i18n('verify-death:form.deathDate.legend')
+              name="deathDate" suffix="camel" error=errors.deathDate
+              value=values.deathDate value-day=values.deathDateDay
+              value-month=values.deathDateMonth value-year=values.deathDateYear/>
+          </div>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="verify-death:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

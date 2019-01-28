@@ -1,0 +1,12 @@
+{
+  "serviceName": "Manage Bereavement Support Payment",
+  "skipLink": "Skip to main content",
+  "errorSummaryHeading": "There’s been a problem",
+  "footer": {
+    "supportLinks": "Support links",
+    "madeInNewcastle": "Made in Newcastle by the {{-link-start}}Department for Work and Pensions{{-link-end}}",
+    "ogl": "Open Government Licence",
+    "availableUnderOgl": "All content is available under the {{-link-start}}Open Government Licence v3.0{{-link-end}}, except where otherwise stated",
+    "copyright": "Crown copyright"
+  }
+}

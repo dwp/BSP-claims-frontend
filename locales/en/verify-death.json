@@ -1,0 +1,35 @@
+{
+  "title": "Verify death - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "Have you seen evidence of the death?",
+  "form": {
+    "seenEvidence": {
+      "legend": "$t(verify-death:heading)",
+      "labelYes": "Yes",
+      "labelNo": "No",
+      "errors": {
+        "presence": "Select whether you have seen evidence of the death."
+      }
+    },
+    "evidence": {
+      "legend": "Where did you see evidence?",
+      "hint": "Select all that apply",
+      "labelCertificate": "On a Certificate of Registration of Death",
+      "labelCIS": "In the Customer Information System (CIS)",
+      "labelNIRS": "In the National Insurance Recording System (eNIRS)",
+      "labelBS": "The Bereavement Service",
+      "errors": {
+        "presence": "Select where you saw evidence of the death."
+      }
+    },
+    "deathDate": {
+      "legend": "Date of death",
+      "errors": {
+        "presence": "Enter a date of death.",
+        "format": "Enter a valid date of death - for example, 16 08 2017.",
+        "future": "You cannot enter a future date of death."
+      }
+    },
+    "submit": "Continue"
+  }
+}

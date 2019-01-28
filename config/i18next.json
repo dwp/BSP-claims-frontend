@@ -1,0 +1,61 @@
+{
+  "detection": {
+    "order": [
+      "querystring",
+      "cookie",
+      "header"
+    ],
+    "lookupQuerystring": "lng",
+    "lookupCookie": "language",
+    "caches": [
+      "cookie"
+    ]
+  },
+  "backend": {
+    "loadPath": "./locales/{{lng}}/{{ns}}.json"
+  },
+  "ns": [
+    "app",
+    "error",
+    "decision",
+    "start-new-claim",
+    "duplicate-claim",
+    "tasks",
+    "view",
+    "claim-details",
+    "claim-header",
+    "claim-history",
+    "confirm-claim",
+    "relationship",
+    "verify-death",
+    "child-benefit",
+    "standard-rate",
+    "dependent-children",
+    "disallow-relationship",
+    "disallow-relationship-evidence",
+    "disallow-death-evidence",
+    "date",
+    "find-claim",
+    "wait-for-evidence",
+    "wait-for-death",
+    "disallowed-pension-age",
+    "disallowed-pension-age-confirm",
+    "payment-details",
+    "verify-ni-conts",
+    "disallow-ni-conts",
+    "schedule",
+    "schedule-old",
+    "change-payment-details",
+    "change-child-benefit",
+    "change-pregnant",
+    "confirm-payment-details",
+    "confirm-dependent-children",
+    "stop",
+    "delete"
+  ],
+  "whitelist": [
+    "en",
+    "cy"
+  ],
+  "fallbackLng": "en"
+}

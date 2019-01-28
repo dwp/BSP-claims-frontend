@@ -1,0 +1,6 @@
+{
+  "@history": {
+    "required": true,
+    "type": "object"
+  }
+}

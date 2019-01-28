@@ -1,0 +1,22 @@
+{
+  "500": {
+    "title": "$t(error:500.heading) - $t(app:serviceName)",
+    "heading": "Something’s gone wrong",
+    "body": "The service is temporarily unavailable. Try again later."
+  },
+  "404": {
+    "title": "$t(error:404.heading) - $t(app:serviceName)",
+    "heading": "Page not found",
+    "body": "If you entered a web address, check it was correct."
+  },
+  "403": {
+    "title": "$t(error:403.heading) - $t(app:serviceName)",
+    "heading": "You’ll need to start again",
+    "body": "Because you have not entered any details for the last 20 minutes, your session has been closed. This helps to keep a claimant’s information as secure as possible."
+  },
+  "401": {
+    "title": "$t(error:401.heading) - $t(app:serviceName)",
+    "heading": "Unauthorised",
+    "body": "You are not authorised to access this service."
+  }
+}

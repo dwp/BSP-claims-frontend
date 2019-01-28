@@ -1,0 +1,49 @@
+<i18n-var/>
+
+$ const {values = {}, errors = {}} = data;
+
+<bsp-layout page-title=i18n('dependent-children:title')>
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/tasks-to-complete`>
+          <i18n-message key="dependent-children:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="dependent-children:heading"/>
+        </h1>
+
+        <form action=`/claim/${data.claimId}/dependent-children` method="post" novalidate>
+          <gov-radios name="dependentChildren" value=values.dependentChildren
+            legend=i18n('dependent-children:form.dependentChildren.legend')
+            error=errors.dependentChildren>
+            <@radio label=i18n('dependent-children:form.dependentChildren.labelYes')
+              value="true"/>
+            <@radio label=i18n('dependent-children:form.dependentChildren.labelNo')
+              value="false"/>
+          </gov-radios>
+
+          <gov-radios name="pregnantAtDateOfDeath" value=values.pregnantAtDateOfDeath
+            legend=i18n('dependent-children:form.pregnantAtDateOfDeath.legend')
+            error=errors.pregnantAtDateOfDeath>
+            <@radio label=i18n('dependent-children:form.pregnantAtDateOfDeath.labelYes')
+              value="true"/>
+            <@radio label=i18n('dependent-children:form.pregnantAtDateOfDeath.labelNo')
+              value="false"/>
+          </gov-radios>
+
+          <bsp-csrf-token/>
+
+          <button.button type="submit">
+            <i18n-message key="dependent-children:form.submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+
+</bsp-layout>

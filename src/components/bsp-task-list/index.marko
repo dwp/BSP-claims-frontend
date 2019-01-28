@@ -1,0 +1,36 @@
+<ol.task-list>
+  <for(taskSectionIndex, taskSection in input.taskSections)>
+    <if(!taskSection.hide)>
+      <li>
+        <h3.task-list-section>
+          ${taskSection.title}
+        </h3>
+        <ul.task-list-items>
+          <for(taskIndex, task in taskSection.tasks)>
+            <if(!task.hide)>
+              <li.task-list-item>
+                $ const taskId = `task-${taskSectionIndex}-${taskIndex}`;
+
+                <if(task.href)>
+                  <a.task-name data-test-hook="task-title" href=task.href aria-describedby=(task.status ? taskId : undefined)>
+                    ${task.name}
+                  </a>
+                </if>
+                <else>
+                  <span data-test-hook=`task-title`>${task.name}</span>
+                </else>
+
+                $ const status = task.status && ('task-status-' + task.status);
+                <if(task.status)>
+                  <strong class=['task-status', status] id=taskId>
+                    <i18n-message key=`tasks:${task.status}`/>
+                  </strong>
+                </if>
+              </li>
+            </if>
+          </for>
+        </ul>
+      </li>
+    </if>
+  </for>
+</ol>

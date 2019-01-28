@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "jquery/dist/jquery.slim.min.js",
+    "./jquery.tabs.js",
+    "./styles.scss"
+  ]
+}

@@ -1,0 +1,33 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('disallow-death-evidence:title')>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/verify-death/wait-for-evidence`>
+          <i18n-message key="disallow-death-evidence:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="disallow-death-evidence:heading"/>
+        </h1>
+
+        <p>
+          <i18n-message key="disallow-death-evidence:body"/>
+        </p>
+
+        <form action=`/claim/${data.claimId}/verify-death/wait-for-evidence/disallow-claim` method="post">
+          <bsp-csrf-token/>
+
+          <button.button-warning.form-group type="submit">
+            <i18n-message key="disallow-death-evidence:submit"/>
+          </button>
+        </form>
+
+        <a.link-cancel href=`/claim/${data.claimId}/verify-death/wait-for-evidence`>
+          <i18n-message key="disallow-death-evidence:cancel"/>
+        </a>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

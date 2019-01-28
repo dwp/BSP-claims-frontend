@@ -1,0 +1,53 @@
+import getDisallowReason from '../../utils/get-disallow-reason';
+
+<i18n-var/>
+
+<bsp-layout page-title=i18n('view:title')>
+
+  <@content>
+
+    $ const claim = data.claim || {};
+    $ const status = claim.decision ? (claim.decision.allow ? 'allowed' : 'disallowed') : 'unfinished';
+
+
+    <div.grid-row>
+      <div.column-two-thirds>
+        <bsp-claim-header
+          status=status
+          name=claim.claimantDetails.fullName
+          nino=claim.nino/>
+
+        <if(claim.schedule)>
+          <bsp-nav-links>
+            <@link title="Claim details" href=`/claim/${claim.claimId}/view`/>
+            <@link title="Payment schedule" href=`/claim/${claim.claimId}/payment-schedule`/>
+          </bsp-nav-links>
+        </if>
+
+
+        $ const disallowedReason = getDisallowReason(claim);
+
+        <if(disallowedReason)>
+          <div.panel.panel-border-narrow.form-section>
+            <p.heading-small>
+              <i18n-message key="view:decision.disallowedBecause"/>
+            </p>
+            <ul.list-bullet>
+              <li>
+                <i18n-message key=`decision:disallowed.${disallowedReason}`/>
+              </li>
+            </ul>
+          </div>
+        </if>
+
+        <bsp-claim-details claim=claim/>
+      </div>
+
+      <div.column-third>
+        <bsp-claim-history history=claim.changeInfoList/>
+      </div>
+    </div>
+
+  </@content>
+
+</bsp-layout>

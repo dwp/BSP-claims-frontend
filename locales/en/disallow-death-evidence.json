@@ -1,0 +1,8 @@
+{
+  "title": "Disallow claim - $t(app:serviceName)",
+  "back": "Back",
+  "heading": "You are about to disallow this claim",
+  "body": "You have seen no evidence of death.",
+  "submit": "Disallow claim",
+  "cancel": "Cancel"
+}

@@ -1,0 +1,26 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('confirm-claim:title')>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/tasks-to-complete`>
+          <i18n-message key="confirm-claim:back"/>
+        </a>
+
+        <h1.heading-large.double-margin>
+          <i18n-message key="confirm-claim:heading"/>
+        </h1>
+
+        <bsp-claim-details claim=data.claim/>
+
+        <form action=`/claim/${data.claimId}/confirm-claim-details` method="post">
+          <bsp-csrf-token/>
+          <button.button type="submit">
+            <i18n-message key="confirm-claim:submit"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

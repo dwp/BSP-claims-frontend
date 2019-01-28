@@ -1,0 +1,7 @@
+{
+  "@nino": {
+    "required": true,
+    "type": "string"
+  },
+  "@hook": "string"
+}

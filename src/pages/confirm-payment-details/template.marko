@@ -1,0 +1,41 @@
+<i18n-var/>
+
+<bsp-layout page-title=i18n('confirm-payment-details:title')>
+  <@content>
+    <div.grid-row>
+      <div.column-two-thirds>
+        <a.link-back href=`/claim/${data.claimId}/change-payment-details`>
+          <i18n-message key="confirm-payment-details:back"/>
+        </a>
+
+        <h1.heading-large>
+          <i18n-message key="confirm-payment-details:heading"/>
+        </h1>
+
+        <bsp-summary>
+          <@item name=i18n('confirm-payment-details:nameOnAccount')>
+            ${data.changePayment.nameOnAccount}
+          </@item>
+          <@item name=i18n('confirm-payment-details:sortCode')>
+            ${data.changePayment.sortCode}
+          </@item>
+          <@item name=i18n('confirm-payment-details:accountNumber')>
+            ${data.changePayment.accountNumber}
+          </@item>
+          <if(data.changePayment.rollNumber)>
+            <@item name=i18n('confirm-payment-details:rollNumber')>
+              ${data.changePayment.rollNumber}
+            </@item>
+          </if>
+        </bsp-summary>
+
+        <form action=`/claim/${data.claimId}/confirm-payment-details` method="post">
+          <bsp-csrf-token/>
+          <button.button type="submit">
+            <i18n-message key="confirm-payment-details:confirm"/>
+          </button>
+        </form>
+      </div>
+    </div>
+  </@content>
+</bsp-layout>

@@ -1,0 +1,21 @@
+{
+  "@task-sections <task-section>[]": {
+    "@title": {
+      "type": "string",
+      "required": true
+    },
+    "@hide": "boolean",
+    "@tasks <task>[]": {
+      "@href": {
+        "type": "string",
+        "required": true
+      },
+      "@name": {
+        "type": "string",
+        "required": true
+      },
+      "@hide": "boolean",
+      "@status": "string"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import 'colours';
+@import 'css3';
+@import 'shims';
+
+.claim-history {
+  border-left: 3px solid $govuk-blue;
+}
+
+.claim-history-item {
+  margin: 2em 0;
+  padding-left: 1em;
+  position: relative;
+}
+
+.claim-history-item::before {
+  background-color: $govuk-blue;
+  content: ' ';
+  height: 3px;
+  left: 0;
+  position: absolute;
+  top: .5em;
+  width: 10px;
+}
+
+.claim-history-title {
+  display: block;
+  font-weight: 700;
+}
+
+.claim-history-meta {
+  color: $secondary-text-colour;
+  margin: 0;
+
+  span {
+    display: block;
+  }
+}
+
+.claim-history-body {
+  display: block;
+}

@@ -1,0 +1,57 @@
+<i18n-var/>
+
+$ const errors = data.errors || false;
+$ const values = data.values || false;
+$ const pageName = 'stop';
+
+<bsp-layout page-title=i18n('stop:title') page-name=pageName>
+
+  <@content>
+
+    <gov-error-summary errors=errors heading=i18n('app:errorSummaryHeading')/>
+
+    <a.link-back href=`/claim/${data.claimId}/payment-schedule`
+      data-journey-click=`link-inbound:from-${pageName}:to-view-schedule`>
+      <i18n-message key="stop:back"/>
+    </a>
+
+    <div.text>
+      <h1.heading-xlarge>
+        <i18n-message key="stop:heading"/>
+      </h1>
+    </div>
+
+    <form method="post" action=`/claim/${data.claimId}/stop` novalidate>
+      <gov-radios hide-legend=true legend=i18n('stop:heading') name="reason"
+        value=values.reason error=errors.reason>
+
+        <@radio label=i18n('stop:form.reason.labelDied') value="death" reveal="death-date">
+          <div id="death-date" class="panel panel-border-narrow js-hidden">
+            <gov-date-input name="deathDate" legend=i18n('stop:form.deathDate.legend')
+              value-day=values.deathDateDay value-month=values.deathDateMonth
+              value-year=values.deathDateYear error=errors.deathDate suffix="camel"/>
+          </div>
+        </@radio>
+
+        <@radio label=i18n('stop:form.reason.labelPrison') value="prison" reveal="prison-date">
+          <div id="prison-date" class="panel panel-border-narrow js-hidden">
+            <gov-date-input name="prisonDate" legend=i18n('stop:form.prisonDate.legend')
+              value-day=values.prisonDateDay value-month=values.prisonDateMonth
+              value-year=values.prisonDateYear error=errors.prisonDate suffix="camel"/>
+          </div>
+        </@radio>
+
+        <@radio label=i18n('stop:form.reason.labelFraud') value="fraud"/>
+        <@radio label=i18n('stop:form.reason.labelError') value="error"/>
+        <@radio label=i18n('stop:form.reason.labelClerical') value="clerical"/>
+      </gov-radios>
+
+      <bsp-csrf-token/>
+
+      <input.button type="submit" value=i18n('stop:form.submit')
+        data-journey-click=`button-submit:${pageName}:${pageName}`/>
+    </form>
+
+  </@content>
+
+</bsp-layout>
