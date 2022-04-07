@@ -6,7 +6,7 @@
   },
   "description": "Frontend for Bereavement Support Payment claim system",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "aws-sdk": "^2.391.0",
     "body-parser": "^1.18.3",
     "connect-redis": "^3.4.0",
