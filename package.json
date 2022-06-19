@@ -17,7 +17,7 @@
 
     "get-uk-state-pension-date": "git+ssh://git@github.com:dwp/BSP-State-Pension-Date.git",
 
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "govuk-elements-marko": "^5.2.6",
     "govuk-elements-sass": "^3.1.3",
     "govuk-template-marko": "^5.0.1",
